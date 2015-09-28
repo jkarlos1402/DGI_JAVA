@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="sgi_test_java"/>
+  <table-filter match-name="cattipeva"/>
+  <table-filter match-name="catgposoc"/>
+  <table-filter match-name="carea"/>
+  <table-filter match-name="catsolpre"/>
+  <table-filter match-name="cmodeje"/>
+  <table-filter match-name="ctipobr"/>
+  <table-filter match-name="catsector"/>
+  <table-filter match-name="cdepto"/>
+  <table-filter match-name="cattitular"/>
+  <table-filter match-name="catejercicio"/>
+  <table-filter match-name="catresarea"/>
+  <table-filter match-name="catclasec"/>
+  <table-filter match-name="catcobertura"/>
+  <table-filter match-name="catue"/>
+</hibernate-reverse-engineering>
