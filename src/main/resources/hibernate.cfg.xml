@@ -9,5 +9,19 @@
     <property name="hibernate.connection.password">root</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <mapping class="com.sgi.pojos.Carea"/>
+    <mapping class="com.sgi.pojos.Catclasec"/>
+    <mapping class="com.sgi.pojos.Catcobertura"/>
+    <mapping class="com.sgi.pojos.Catejercicio"/>
+    <mapping class="com.sgi.pojos.Catgposoc"/>
+    <mapping class="com.sgi.pojos.Catresarea"/>
+    <mapping class="com.sgi.pojos.Catsector"/>
+    <mapping class="com.sgi.pojos.Catsolpre"/>
+    <mapping class="com.sgi.pojos.Cattipeva"/>
+    <mapping class="com.sgi.pojos.Cattitular"/>
+    <mapping class="com.sgi.pojos.Catue"/>
+    <mapping class="com.sgi.pojos.Cdepto"/>
+    <mapping class="com.sgi.pojos.Cmodeje"/>
+    <mapping class="com.sgi.pojos.Ctipobr"/>
   </session-factory>
 </hibernate-configuration>

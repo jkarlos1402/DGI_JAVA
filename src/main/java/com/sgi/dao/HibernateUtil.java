@@ -6,9 +6,8 @@
 package com.sgi.dao;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -22,8 +21,9 @@ public class HibernateUtil {
     
     static {
         try {
-            final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+            Configuration configuration = new Configuration().configure();
+            final StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            sessionFactory = configuration.buildSessionFactory(builder.build());
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);

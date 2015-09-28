@@ -12,11 +12,11 @@ import javax.validation.constraints.Size;
 public class Catejercicio implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @Id    
+
+    @Id
     @Column(name = "Ejercicio")
     private Short ejercicio;
-    
+
     @Size(max = 100)
     @Column(name = "Frase")
     private String frase;
@@ -66,7 +66,7 @@ public class Catejercicio implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catejercicio[ ejercicio=" + ejercicio + " ]";
+        return ejercicio+"";
     }
 
 }
