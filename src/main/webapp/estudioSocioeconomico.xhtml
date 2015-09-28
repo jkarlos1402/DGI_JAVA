@@ -9,6 +9,7 @@
         <title>Estudio Socioeconomico (Banco de proyectos)</title>
     </h:head>
     <h:body>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/estilosGenerales.css" />
         <h:form>
             <div class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
@@ -24,6 +25,36 @@
                         </p:fieldset>
                     </div>
                     <div class="ui-grid-col-4"></div>
+                </div>
+                <div class="ui-grid-row">                    
+                    <div class="ui-grid-col-12">
+                        <p:wizard flowListener="#{hoja1Estudio.onFlowProcess}">
+                            <p:tab id="hoja1Bco" title="Hoja 1">
+                                <p:panel header="Hoja 1">
+                                    <p:messages />
+                                    <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
+                                        <h:outputText value="No. Banco de Proyectos: "/>
+                                        <h:outputText value="#{hoja1Estudio.noBanco}"/>
+
+                                        <h:outputLabel value="Ejercicio:*" for="ejercicioBco"/>
+                                        <p:selectOneMenu id="ejercicioBco" value="#{hoja1Estudio.ejercicioSelected}" effect="fold" required="true" converter="ejercicioConverter" label="Ejercicio">
+                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                            <f:selectItems value="#{hoja1Estudio.catalogoEjericios}" />
+                                        </p:selectOneMenu>
+                                        
+                                        <h:outputLabel value="Vida &uacute;til del proyecto (A&ntilde;os):" for="vidaUtil"/>
+                                        <h:inputText value="#{hoja1Estudio.vidaUtil}" id="vidaUtil" label="Vida &uacute;til del proyecto"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:tab>                        
+                            <p:tab id="hoja2Bco" title="Hoja 2">
+                                <p:panel header="Hoja 2">
+                                    <p:messages />
+                                    
+                                </p:panel>
+                            </p:tab>                        
+                        </p:wizard>
+                    </div>                                                          
                 </div>
             </div>
         </h:form>        
