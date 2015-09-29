@@ -23,5 +23,9 @@
     <mapping class="com.sgi.pojos.Cdepto"/>
     <mapping class="com.sgi.pojos.Cmodeje"/>
     <mapping class="com.sgi.pojos.Ctipobr"/>
+    <mapping class="com.sgi.pojos.Catedosol"/>
+    <mapping class="com.sgi.pojos.Ctiploc"/>
+    <mapping class="com.sgi.pojos.Catbeneficiario"/>
+    <mapping class="com.sgi.pojos.Catmeta"/>
   </session-factory>
 </hibernate-configuration>

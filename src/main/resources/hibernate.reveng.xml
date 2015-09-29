@@ -16,4 +16,8 @@
   <table-filter match-name="catclasec"/>
   <table-filter match-name="catcobertura"/>
   <table-filter match-name="catue"/>
+  <table-filter match-name="catedosol"/>
+  <table-filter match-name="ctiploc"/>
+  <table-filter match-name="catbeneficiario"/>
+  <table-filter match-name="catmeta"/>
 </hibernate-reverse-engineering>
