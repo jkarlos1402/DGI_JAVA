@@ -28,4 +28,12 @@
   <table-filter match-name="cclaobr"/>
   <table-filter match-name="cedoaps"/>
   <table-filter match-name="cedoofi"/>
+  <table-filter match-name="cempresa"/>
+  <table-filter match-name="cmodadj"/>
+  <table-filter match-name="cmodadjcontr"/>
+  <table-filter match-name="ctipaps"/>
+  <table-filter match-name="ctipobrcontr"/>
+  <table-filter match-name="ctipofi"/>
+  <table-filter match-name="ctiprel"/>
+  <table-filter match-name="catfte2015"/>
 </hibernate-reverse-engineering>

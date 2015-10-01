@@ -35,5 +35,13 @@
     <mapping class="com.sgi.pojos.Cclaobr"/>
     <mapping class="com.sgi.pojos.Cedoaps"/>
     <mapping class="com.sgi.pojos.Cedoofi"/>
+    <mapping class="com.sgi.pojos.Cempresa"/>
+    <mapping class="com.sgi.pojos.Cmodadj"/>
+    <mapping class="com.sgi.pojos.Cmodadjcontr"/>
+    <mapping class="com.sgi.pojos.Ctipaps"/>
+    <mapping class="com.sgi.pojos.Ctipobrcontr"/>
+    <mapping class="com.sgi.pojos.Ctipofi"/>
+    <mapping class="com.sgi.pojos.Ctiprel"/>
+    <mapping class="com.sgi.pojos.Catfte2015"/>
   </session-factory>
 </hibernate-configuration>
