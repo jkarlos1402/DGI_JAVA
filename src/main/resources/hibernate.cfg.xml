@@ -27,5 +27,13 @@
     <mapping class="com.sgi.pojos.Ctiploc"/>
     <mapping class="com.sgi.pojos.Catbeneficiario"/>
     <mapping class="com.sgi.pojos.Catmeta"/>
+    <mapping class="com.sgi.pojos.Catregion"/>
+    <mapping class="com.sgi.pojos.Catrespuesta"/>
+    <mapping class="com.sgi.pojos.Catsesion"/>
+    <mapping class="com.sgi.pojos.Catsrvpub"/>
+    <mapping class="com.sgi.pojos.Cattipofifon"/>
+    <mapping class="com.sgi.pojos.Cclaobr"/>
+    <mapping class="com.sgi.pojos.Cedoaps"/>
+    <mapping class="com.sgi.pojos.Cedoofi"/>
   </session-factory>
 </hibernate-configuration>

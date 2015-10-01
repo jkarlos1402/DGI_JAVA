@@ -20,4 +20,12 @@
   <table-filter match-name="ctiploc"/>
   <table-filter match-name="catbeneficiario"/>
   <table-filter match-name="catmeta"/>
+  <table-filter match-name="catregion"/>
+  <table-filter match-name="catrespuesta"/>
+  <table-filter match-name="catsesion"/>
+  <table-filter match-name="catsrvpub"/>
+  <table-filter match-name="cattipofifon"/>
+  <table-filter match-name="cclaobr"/>
+  <table-filter match-name="cedoaps"/>
+  <table-filter match-name="cedoofi"/>
 </hibernate-reverse-engineering>
