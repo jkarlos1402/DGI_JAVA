@@ -43,5 +43,10 @@
     <mapping class="com.sgi.pojos.Ctipofi"/>
     <mapping class="com.sgi.pojos.Ctiprel"/>
     <mapping class="com.sgi.pojos.Catfte2015"/>
+    <mapping class="com.sgi.pojos.Ctxtofi"/>
+    <mapping class="com.sgi.pojos.Cattipacu"/>
+    <mapping class="com.sgi.pojos.Catparpol"/>
+    <mapping class="com.sgi.pojos.Catmunicipio"/>
+    <mapping class="com.sgi.pojos.Catacuerdo"/>
   </session-factory>
 </hibernate-configuration>
