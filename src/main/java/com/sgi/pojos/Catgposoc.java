@@ -18,7 +18,7 @@ public class Catgposoc implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdGpo")
-    private Short idGpo;
+    private Integer idGpo;
     
     @Size(max = 100)
     @Column(name = "NomGpo")
@@ -27,15 +27,15 @@ public class Catgposoc implements Serializable {
     public Catgposoc() {
     }
 
-    public Catgposoc(Short idGpo) {
+    public Catgposoc(Integer idGpo) {
         this.idGpo = idGpo;
     }
 
-    public Short getIdGpo() {
+    public Integer getIdGpo() {
         return idGpo;
     }
 
-    public void setIdGpo(Short idGpo) {
+    public void setIdGpo(Integer idGpo) {
         this.idGpo = idGpo;
     }
 

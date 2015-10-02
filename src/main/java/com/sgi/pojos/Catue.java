@@ -21,7 +21,7 @@ public class Catue implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdUE")
-    private Short idUE;
+    private Integer idUE;
     
     @Size(max = 150)
     @Column(name = "NomUE")
@@ -42,15 +42,15 @@ public class Catue implements Serializable {
     public Catue() {
     }
 
-    public Catue(Short idUE) {
+    public Catue(Integer idUE) {
         this.idUE = idUE;
     }
 
-    public Short getIdUE() {
+    public Integer getIdUE() {
         return idUE;
     }
 
-    public void setIdUE(Short idUE) {
+    public void setIdUE(Integer idUE) {
         this.idUE = idUE;
     }
 

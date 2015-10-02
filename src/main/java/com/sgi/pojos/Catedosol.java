@@ -19,7 +19,7 @@ public class Catedosol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdEdoSol")
-    private Short idEdoSol;
+    private Integer idEdoSol;
     
     @Size(max = 20)
     @Column(name = "NomEdo")
@@ -28,15 +28,15 @@ public class Catedosol implements Serializable {
     public Catedosol() {
     }
 
-    public Catedosol(Short idEdoSol) {
+    public Catedosol(Integer idEdoSol) {
         this.idEdoSol = idEdoSol;
     }
 
-    public Short getIdEdoSol() {
+    public Integer getIdEdoSol() {
         return idEdoSol;
     }
 
-    public void setIdEdoSol(Short idEdoSol) {
+    public void setIdEdoSol(Integer idEdoSol) {
         this.idEdoSol = idEdoSol;
     }
 

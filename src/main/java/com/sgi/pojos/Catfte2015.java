@@ -18,7 +18,7 @@ public class Catfte2015 implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "idFte")
-    private Short idFte;
+    private Integer idFte;
     
     @Size(max = 8)
     @Column(name = "CveFte")
@@ -40,15 +40,15 @@ public class Catfte2015 implements Serializable {
     public Catfte2015() {
     }
 
-    public Catfte2015(Short idFte) {
+    public Catfte2015(Integer idFte) {
         this.idFte = idFte;
     }
 
-    public Short getIdFte() {
+    public Integer getIdFte() {
         return idFte;
     }
 
-    public void setIdFte(Short idFte) {
+    public void setIdFte(Integer idFte) {
         this.idFte = idFte;
     }
 

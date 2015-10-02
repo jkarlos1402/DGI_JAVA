@@ -18,7 +18,7 @@ public class Cattitular implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdTit")
-    private Short idTit;
+    private Integer idTit;
     
     @Size(max = 60)
     @Column(name = "Titulo")
@@ -40,15 +40,15 @@ public class Cattitular implements Serializable {
     public Cattitular() {
     }
 
-    public Cattitular(Short idTit) {
+    public Cattitular(Integer idTit) {
         this.idTit = idTit;
     }
 
-    public Short getIdTit() {
+    public Integer getIdTit() {
         return idTit;
     }
 
-    public void setIdTit(Short idTit) {
+    public void setIdTit(Integer idTit) {
         this.idTit = idTit;
     }
 

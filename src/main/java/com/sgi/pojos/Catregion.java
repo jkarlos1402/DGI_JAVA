@@ -18,7 +18,7 @@ public class Catregion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdReg")
-    private Short idReg;
+    private Integer idReg;
     
     @Size(max = 4)
     @Column(name = "CveReg")
@@ -31,15 +31,15 @@ public class Catregion implements Serializable {
     public Catregion() {
     }
 
-    public Catregion(Short idReg) {
+    public Catregion(Integer idReg) {
         this.idReg = idReg;
     }
 
-    public Short getIdReg() {
+    public Integer getIdReg() {
         return idReg;
     }
 
-    public void setIdReg(Short idReg) {
+    public void setIdReg(Integer idReg) {
         this.idReg = idReg;
     }
 

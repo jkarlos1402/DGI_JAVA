@@ -18,7 +18,7 @@ public class Catsolpre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdSolPre")
-    private Short idSolPre;
+    private Integer idSolPre;
     
     @Size(max = 50)
     @Column(name = "NomSolPre")
@@ -27,15 +27,15 @@ public class Catsolpre implements Serializable {
     public Catsolpre() {
     }
 
-    public Catsolpre(Short idSolPre) {
+    public Catsolpre(Integer idSolPre) {
         this.idSolPre = idSolPre;
     }
 
-    public Short getIdSolPre() {
+    public Integer getIdSolPre() {
         return idSolPre;
     }
 
-    public void setIdSolPre(Short idSolPre) {
+    public void setIdSolPre(Integer idSolPre) {
         this.idSolPre = idSolPre;
     }
 

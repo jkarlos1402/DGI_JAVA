@@ -18,7 +18,7 @@ public class Catrespuesta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdRsp")
-    private Boolean idRsp;
+    private Integer idRsp;
     
     @Size(max = 15)
     @Column(name = "NomRsp")
@@ -27,15 +27,15 @@ public class Catrespuesta implements Serializable {
     public Catrespuesta() {
     }
 
-    public Catrespuesta(Boolean idRsp) {
+    public Catrespuesta(Integer idRsp) {
         this.idRsp = idRsp;
     }
 
-    public Boolean getIdRsp() {
+    public Integer getIdRsp() {
         return idRsp;
     }
 
-    public void setIdRsp(Boolean idRsp) {
+    public void setIdRsp(Integer idRsp) {
         this.idRsp = idRsp;
     }
 

@@ -22,7 +22,7 @@ public class Catcobertura implements Serializable {
     @Id   
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCob")    
-    private Short idCob;
+    private Integer idCob;
     
     @Size(max = 15)
     @Column(name = "NomCob")
@@ -31,15 +31,15 @@ public class Catcobertura implements Serializable {
     public Catcobertura() {
     }
 
-    public Catcobertura(Short idCob) {
+    public Catcobertura(Integer idCob) {
         this.idCob = idCob;
     }
 
-    public Short getIdCob() {
+    public Integer getIdCob() {
         return idCob;
     }
 
-    public void setIdCob(Short idCob) {
+    public void setIdCob(Integer idCob) {
         this.idCob = idCob;
     }
 

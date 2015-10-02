@@ -17,7 +17,7 @@ public class Catclasec implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idClaSec")
-    private Short idClaSec;
+    private Integer idClaSec;
 
     @Size(max = 20)
     @Column(name = "NomClaSec")
@@ -26,15 +26,15 @@ public class Catclasec implements Serializable {
     public Catclasec() {
     }
 
-    public Catclasec(Short idClaSec) {
+    public Catclasec(Integer idClaSec) {
         this.idClaSec = idClaSec;
     }
 
-    public Short getIdClaSec() {
+    public Integer getIdClaSec() {
         return idClaSec;
     }
 
-    public void setIdClaSec(Short idClaSec) {
+    public void setIdClaSec(Integer idClaSec) {
         this.idClaSec = idClaSec;
     }
 

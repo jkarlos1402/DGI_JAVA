@@ -19,7 +19,7 @@ public class Catmeta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdMet")
-    private Short idMet;
+    private Integer idMet;
 
     @Size(max = 40)
     @Column(name = "NomMet")
@@ -33,15 +33,15 @@ public class Catmeta implements Serializable {
     public Catmeta() {
     }
 
-    public Catmeta(Short idMet) {
+    public Catmeta(Integer idMet) {
         this.idMet = idMet;
     }
 
-    public Short getIdMet() {
+    public Integer getIdMet() {
         return idMet;
     }
 
-    public void setIdMet(Short idMet) {
+    public void setIdMet(Integer idMet) {
         this.idMet = idMet;
     }
 

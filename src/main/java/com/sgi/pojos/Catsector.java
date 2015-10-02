@@ -21,7 +21,7 @@ public class Catsector implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdSec")
-    private Short idSec;
+    private Integer idSec;
     
     @Size(max = 40)
     @Column(name = "NomSec")
@@ -38,15 +38,15 @@ public class Catsector implements Serializable {
     public Catsector() {
     }
 
-    public Catsector(Short idSec) {
+    public Catsector(Integer idSec) {
         this.idSec = idSec;
     }
 
-    public Short getIdSec() {
+    public Integer getIdSec() {
         return idSec;
     }
 
-    public void setIdSec(Short idSec) {
+    public void setIdSec(Integer idSec) {
         this.idSec = idSec;
     }
 

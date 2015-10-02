@@ -19,7 +19,7 @@ public class Ctiprel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdTipRel")
-    private Short idTipRel;
+    private Integer idTipRel;
     
     @Size(max = 5)
     @Column(name = "CveSrv")
@@ -50,15 +50,15 @@ public class Ctiprel implements Serializable {
     public Ctiprel() {
     }
 
-    public Ctiprel(Short idTipRel) {
+    public Ctiprel(Integer idTipRel) {
         this.idTipRel = idTipRel;
     }
 
-    public Short getIdTipRel() {
+    public Integer getIdTipRel() {
         return idTipRel;
     }
 
-    public void setIdTipRel(Short idTipRel) {
+    public void setIdTipRel(Integer idTipRel) {
         this.idTipRel = idTipRel;
     }
 

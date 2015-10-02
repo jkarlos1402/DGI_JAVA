@@ -18,7 +18,7 @@ public class Cattipacu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdTipAcu")
-    private Short idTipAcu;
+    private Integer idTipAcu;
     
     @Size(max = 40)
     @Column(name = "NomTipAcu")
@@ -27,15 +27,15 @@ public class Cattipacu implements Serializable {
     public Cattipacu() {
     }
 
-    public Cattipacu(Short idTipAcu) {
+    public Cattipacu(Integer idTipAcu) {
         this.idTipAcu = idTipAcu;
     }
 
-    public Short getIdTipAcu() {
+    public Integer getIdTipAcu() {
         return idTipAcu;
     }
 
-    public void setIdTipAcu(Short idTipAcu) {
+    public void setIdTipAcu(Integer idTipAcu) {
         this.idTipAcu = idTipAcu;
     }
 

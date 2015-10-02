@@ -18,7 +18,7 @@ public class Catparpol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdParPol")
-    private Short idParPol;
+    private Integer idParPol;
     
     @Size(max = 6)
     @Column(name = "CveParPol")
@@ -31,15 +31,15 @@ public class Catparpol implements Serializable {
     public Catparpol() {
     }
 
-    public Catparpol(Short idParPol) {
+    public Catparpol(Integer idParPol) {
         this.idParPol = idParPol;
     }
 
-    public Short getIdParPol() {
+    public Integer getIdParPol() {
         return idParPol;
     }
 
-    public void setIdParPol(Short idParPol) {
+    public void setIdParPol(Integer idParPol) {
         this.idParPol = idParPol;
     }
 

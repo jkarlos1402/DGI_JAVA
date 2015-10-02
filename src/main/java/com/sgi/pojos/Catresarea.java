@@ -18,7 +18,7 @@ public class Catresarea implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "IdRes")
-    private Short idRes;
+    private Integer idRes;
     
     @Size(max = 60)
     @Column(name = "TitRes")
@@ -39,15 +39,15 @@ public class Catresarea implements Serializable {
     public Catresarea() {
     }
 
-    public Catresarea(Short idRes) {
+    public Catresarea(Integer idRes) {
         this.idRes = idRes;
     }
 
-    public Short getIdRes() {
+    public Integer getIdRes() {
         return idRes;
     }
 
-    public void setIdRes(Short idRes) {
+    public void setIdRes(Integer idRes) {
         this.idRes = idRes;
     }
 

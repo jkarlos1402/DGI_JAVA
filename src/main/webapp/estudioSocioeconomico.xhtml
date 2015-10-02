@@ -41,25 +41,28 @@
                                             <f:selectItem itemLabel="Seleccione" itemValue="" />
                                             <f:selectItems value="#{hoja1Estudio.catalogoEjericios}" />
                                         </p:selectOneMenu>
-                                        
+
                                         <h:outputLabel value="Vida &uacute;til del proyecto (A&ntilde;os):" for="vidaUtil"/>
                                         <h:inputText value="#{hoja1Estudio.vidaUtil}" id="vidaUtil" label="Vida &uacute;til del proyecto"/>
-                                        
+
                                         <h:outputLabel value="Nombre de la obra:" for="nomObrBco"/>
                                         <h:inputTextarea value="#{hoja1Estudio.nombreObra}" id="nomObrBco" required="true" label="Nombre de la obra"/>
-                                        
+
                                         <h:outputText value="Unidad Ejecutora: "/>
                                         <h:outputText />
-                                        
+
                                         <h:outputText value="Sector: "/>
                                         <h:outputText />
+
+                                        <h3 style="margin-top: 0">Acciones de Gobierno Federal</h3>
+                                        <p:pickList id="pickListAccionesF" value="#{hoja1Estudio.accionesFederales}" var="accionesFederales" itemLabel="#{accionesFederales}" itemValue="#{accionesFederales}" />
                                     </h:panelGrid>
                                 </p:panel>
                             </p:tab>                        
                             <p:tab id="hoja2Bco" title="Hoja 2">
                                 <p:panel header="Hoja 2">
                                     <p:messages />
-                                    
+
                                 </p:panel>
                             </p:tab>                        
                         </p:wizard>

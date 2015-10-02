@@ -18,7 +18,7 @@ public class EjercicioConverter implements Converter{
         if(value != null && value.trim().length() > 0) {
             try {
                 Catejercicio ejercicio = new Catejercicio();                
-                ejercicio.setEjercicio(new Short(value));
+                ejercicio.setEjercicio(new Integer(value));
                 ServletContext sc = (ServletContext)context.getExternalContext().getContext();
                 List<Catejercicio> ejercicios = (List<Catejercicio>)sc.getAttribute("catalogo_ejercicio");
                 for (Catejercicio ejer : ejercicios) {

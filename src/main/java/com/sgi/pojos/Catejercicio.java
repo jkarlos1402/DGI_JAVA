@@ -15,7 +15,7 @@ public class Catejercicio implements Serializable {
 
     @Id
     @Column(name = "Ejercicio")
-    private Short ejercicio;
+    private Integer ejercicio;
 
     @Size(max = 100)
     @Column(name = "Frase")
@@ -24,15 +24,15 @@ public class Catejercicio implements Serializable {
     public Catejercicio() {
     }
 
-    public Catejercicio(Short ejercicio) {
+    public Catejercicio(Integer ejercicio) {
         this.ejercicio = ejercicio;
     }
 
-    public Short getEjercicio() {
+    public Integer getEjercicio() {
         return ejercicio;
     }
 
-    public void setEjercicio(Short ejercicio) {
+    public void setEjercicio(Integer ejercicio) {
         this.ejercicio = ejercicio;
     }
 

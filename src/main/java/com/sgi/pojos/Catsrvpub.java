@@ -24,7 +24,7 @@ public class Catsrvpub implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSrv")
-    private Short idSrv;
+    private Integer idSrv;
     
     @Size(max = 5)
     @Column(name = "CveSrv")
@@ -57,11 +57,11 @@ public class Catsrvpub implements Serializable {
     public Catsrvpub() {
     }
 
-    public Catsrvpub(Short idSrv) {
+    public Catsrvpub(Integer idSrv) {
         this.idSrv = idSrv;
     }
 
-    public Short getIdSrv() {
+    public Integer getIdSrv() {
         return idSrv;
     }
 
@@ -73,7 +73,7 @@ public class Catsrvpub implements Serializable {
         this.idSec = idSec;
     }
 
-    public void setIdSrv(Short idSrv) {
+    public void setIdSrv(Integer idSrv) {
         this.idSrv = idSrv;
     }
 

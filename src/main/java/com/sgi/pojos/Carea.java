@@ -20,7 +20,7 @@ public class Carea implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDir")
-    private Short idDir;
+    private Integer idDir;
     
     @Size(max = 200)
     @Column(name = "NomDir")
@@ -36,15 +36,15 @@ public class Carea implements Serializable {
     public Carea() {
     }
 
-    public Carea(Short idDir) {
+    public Carea(Integer idDir) {
         this.idDir = idDir;
     }
 
-    public Short getIdDir() {
+    public Integer getIdDir() {
         return idDir;
     }
 
-    public void setIdDir(Short idDir) {
+    public void setIdDir(Integer idDir) {
         this.idDir = idDir;
     }
 

@@ -21,7 +21,7 @@ public class Catmunicipio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdMun")
-    private Short idMun;
+    private Integer idMun;
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -48,15 +48,15 @@ public class Catmunicipio implements Serializable {
     public Catmunicipio() {
     }
 
-    public Catmunicipio(Short idMun) {
+    public Catmunicipio(Integer idMun) {
         this.idMun = idMun;
     }
 
-    public Short getIdMun() {
+    public Integer getIdMun() {
         return idMun;
     }
 
-    public void setIdMun(Short idMun) {
+    public void setIdMun(Integer idMun) {
         this.idMun = idMun;
     }
 
