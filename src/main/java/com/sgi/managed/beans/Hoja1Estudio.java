@@ -4,6 +4,8 @@ import com.sgi.pojos.Catacuerdo;
 import com.sgi.pojos.Catejercicio;
 import com.sgi.pojos.Catsector;
 import com.sgi.pojos.Catue;
+import com.sgi.pojos.Cmodeje;
+import com.sgi.pojos.Ctipobr;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.TransferEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
 
@@ -28,18 +31,89 @@ public class Hoja1Estudio implements Serializable {
     private String nombreObra;
     private Catue unidadEjecutora;
     private Catsector sector;
+    private String justificacion;
+    private Cmodeje modoSelected;
+    private List<Cmodeje> catalogoModEje;
+    private Ctipobr tipoObraSelected;
+    private List<Ctipobr> catalogoTipoObr;
+    private double montoInversion;
 
     //para control UI
     private boolean skip;
     private DualListModel<Catacuerdo> accionesFederales;
+    private DualListModel<Catacuerdo> accionesEstatales;
 
     public Hoja1Estudio() {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         catalogoEjericios = (List<Catejercicio>)servletContext.getAttribute("catalogo_ejercicio");
         
         List<Catacuerdo> acuerdosFederales = (List<Catacuerdo>)servletContext.getAttribute("catalogo_acuerdos_federales");
-        List<Catacuerdo> acuerdosFederalesSelected = new ArrayList<>();
+        List<Catacuerdo> acuerdosFederalesSelected = new ArrayList<>();        
         accionesFederales = new DualListModel<>(acuerdosFederales, acuerdosFederalesSelected);
+        
+        List<Catacuerdo> acuerdosEstatales = (List<Catacuerdo>)servletContext.getAttribute("catalogo_acuerdos_estatales");
+        List<Catacuerdo> acuerdosEstatalesSelected = new ArrayList<>();        
+        accionesEstatales = new DualListModel<>(acuerdosEstatales, acuerdosEstatalesSelected);
+        
+        catalogoModEje = (List<Cmodeje>)servletContext.getAttribute("catalogo_modo_ejecucion");
+        
+        catalogoTipoObr = (List<Ctipobr>)servletContext.getAttribute("catalogo_tipo_obra");
+    }
+
+    public double getMontoInversion() {
+        return montoInversion;
+    }
+
+    public void setMontoInversion(double montoInversion) {
+        this.montoInversion = montoInversion;
+    }
+
+    public Ctipobr getTipoObraSelected() {
+        return tipoObraSelected;
+    }
+
+    public void setTipoObraSelected(Ctipobr tipoObraSelected) {
+        this.tipoObraSelected = tipoObraSelected;
+    }
+
+    public List<Ctipobr> getCatalogoTipoObr() {
+        return catalogoTipoObr;
+    }
+
+    public void setCatalogoTipoObr(List<Ctipobr> catalogoTipoObr) {
+        this.catalogoTipoObr = catalogoTipoObr;
+    }
+
+    public Cmodeje getModoSelected() {
+        return modoSelected;
+    }
+
+    public void setModoSelected(Cmodeje modoSeleccionado) {
+        this.modoSelected = modoSeleccionado;
+    }
+
+    public List<Cmodeje> getCatalogoModEje() {
+        return catalogoModEje;
+    }
+
+    public void setCatalogoModEje(List<Cmodeje> catalogoModEje) {
+        this.catalogoModEje = catalogoModEje;
+    }
+
+    public String getJustificacion() {
+        return justificacion;
+    }
+
+    public void setJustificacion(String justificacion) {
+        this.justificacion = justificacion;
+    }
+
+    public DualListModel<Catacuerdo> getAccionesEstatales() {
+        return accionesEstatales;
+    }
+
+    public void setAccionesEstatales(DualListModel<Catacuerdo> accionesEstatales) {
+        this.accionesEstatales = accionesEstatales;
     }
 
     public DualListModel<Catacuerdo> getAccionesFederales() {
@@ -125,7 +199,12 @@ public class Hoja1Estudio implements Serializable {
     
     public void onSelect(SelectEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento seleccionado", event.getObject().toString()));        
+    }
+    
+    public void onTransfer(TransferEvent event){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento(s) transferido(s)", event.getItems().size()+""));        
     }
      
     public void onUnselect(UnselectEvent event) {

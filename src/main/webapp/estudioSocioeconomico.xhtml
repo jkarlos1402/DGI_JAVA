@@ -37,7 +37,7 @@
                                         <h:outputText value="#{hoja1Estudio.noBanco}"/>
 
                                         <h:outputLabel value="Ejercicio:*" for="ejercicioBco"/>
-                                        <p:selectOneMenu id="ejercicioBco" value="#{hoja1Estudio.ejercicioSelected}" effect="fold" required="true" converter="ejercicioConverter" label="Ejercicio">
+                                        <p:selectOneMenu id="ejercicioBco" value="#{hoja1Estudio.ejercicioSelected}" required="true" converter="ejercicioConverter" label="Ejercicio">
                                             <f:selectItem itemLabel="Seleccione" itemValue="" />
                                             <f:selectItems value="#{hoja1Estudio.catalogoEjericios}" />
                                         </p:selectOneMenu>
@@ -54,8 +54,51 @@
                                         <h:outputText value="Sector: "/>
                                         <h:outputText />
 
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">
+                                        <p:growl id="msgAcciones" showDetail="true" escape="false" />
                                         <h3 style="margin-top: 0">Acciones de Gobierno Federal</h3>
-                                        <p:pickList id="pickListAccionesF" value="#{hoja1Estudio.accionesFederales}" var="accionesFederales" itemLabel="#{accionesFederales}" itemValue="#{accionesFederales}" />
+                                        <p:pickList id="pickListAccionesF" value="#{hoja1Estudio.accionesFederales}" var="accionesFederales" itemLabel="#{accionesFederales}" itemValue="#{accionesFederales}" >
+                                            <f:facet name="sourceCaption">Disponibles</f:facet>
+                                            <f:facet name="targetCaption">Seleccionados</f:facet>
+                                            <p:ajax event="select" listener="#{hoja1Estudio.onSelect}" update="msgAcciones" />
+                                            <p:ajax event="transfer" listener="#{hoja1Estudio.onTransfer}" update="msgAcciones" />
+                                        </p:pickList>
+                                        <h3 style="margin-top: 0">Acciones de Gobierno Estatal</h3>
+                                        <p:pickList id="pickListAccionesE" showSourceFilter="true" filterMatchMode="contains" value="#{hoja1Estudio.accionesEstatales}" var="accionesEstatales" itemLabel="#{accionesEstatales}" itemValue="#{accionesEstatales}" >
+                                            <f:facet name="sourceCaption">Disponibles</f:facet>
+                                            <f:facet name="targetCaption">Seleccionados</f:facet>
+                                            <p:ajax event="select" listener="#{hoja1Estudio.onSelect}" update="msgAcciones" />
+                                            <p:ajax event="transfer" listener="#{hoja1Estudio.onTransfer}" update="msgAcciones" />
+                                        </p:pickList>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
+                                        <h:outputLabel value="Justificaci&oacute;n de la obra*:" for="justObrBco"/>
+                                        <h:inputTextarea value="#{hoja1Estudio.justificacion}" id="justObrBco" required="true" label="Justificaci&oacute;n de la obra"/>
+
+                                        <h:outputLabel value="Modalidad de ejecuci&oacute;n:*" for="modEjeBco"/>
+                                        <p:selectOneMenu id="modEjeBco" value="#{hoja1Estudio.modoSelected}" required="true" converter="modoEjecucionConverter" label="Modalidad de ejecuci&oacute;n">
+                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                            <f:selectItems value="#{hoja1Estudio.catalogoModEje}" />
+                                        </p:selectOneMenu>
+
+                                        <h:outputLabel value="Tipo de obra:*" for="tipObrBco"/>
+                                        <p:selectOneMenu id="tipObrBco" value="#{hoja1Estudio.tipoObraSelected}" required="true" converter="tipoObrConverter" label="Tipo de obra">
+                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                            <f:selectItems value="#{hoja1Estudio.catalogoTipoObr}" />
+                                        </p:selectOneMenu>
+
+                                        <h:outputText value="Monto de la inversi&oacute;n: "/>
+                                        <h:outputText value="#{hoja1Estudio.montoInversion}" />
+                                    </h:panelGrid>  
+                                    <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">
+                                        <p:dataTable id="fuentesFederales" var="fuenteFederal" value="#{fuentesInversion.fuentesFederalesSelected}" editable="true" style="margin-bottom:20px">
+                                            <f:facet name="header">
+                                                Fuente(s) federal(es)
+                                            </f:facet>
+                                            <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
+                                            <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+                                        </p:dataTable>
                                     </h:panelGrid>
                                 </p:panel>
                             </p:tab>                        

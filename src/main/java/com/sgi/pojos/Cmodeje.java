@@ -69,7 +69,7 @@ public class Cmodeje implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Cmodeje[ idModEje=" + idModEje + " ]";
+        return nomModEje;
     }
     
 }

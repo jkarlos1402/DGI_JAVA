@@ -1,11 +1,17 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -23,6 +29,10 @@ public class Cattipacu implements Serializable {
     @Size(max = 40)
     @Column(name = "NomTipAcu")
     private String nomTipAcu;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "IdTipAcu")
+    private List<Catacuerdo> acuerdos = new ArrayList<>();
 
     public Cattipacu() {
     }
@@ -45,6 +55,14 @@ public class Cattipacu implements Serializable {
 
     public void setNomTipAcu(String nomTipAcu) {
         this.nomTipAcu = nomTipAcu;
+    }
+
+    public List<Catacuerdo> getAcuerdos() {
+        return acuerdos;
+    }
+
+    public void setAcuerdos(List<Catacuerdo> acuerdos) {
+        this.acuerdos = acuerdos;
     }
 
     @Override

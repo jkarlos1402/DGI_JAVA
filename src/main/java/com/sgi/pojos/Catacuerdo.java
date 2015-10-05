@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -28,8 +30,8 @@ public class Catacuerdo implements Serializable {
     @Column(name = "IdAcu")
     private Integer idAcu;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @ManyToOne
+    @JoinColumn(name = "IdTipAcu")
     private Cattipacu idTipAcu;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -275,7 +277,7 @@ public class Catacuerdo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catacuerdo[ idAcu=" + idAcu + " ]";
+        return cveAcu + " " + nomAcu;
     }
 
 }

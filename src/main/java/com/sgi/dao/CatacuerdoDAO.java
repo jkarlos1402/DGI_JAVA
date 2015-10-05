@@ -8,12 +8,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public class CatacuerdoDAO {
-    public List<Catacuerdo> getAcuerdosFederales(){
+
+    public List<Catacuerdo> getAcuerdosFederales() {
         SessionFactory factory = null;
         Session session = null;
         factory = HibernateUtil.getSessionFactory();
         session = factory.openSession();
-        Query query = session.createQuery("from Catacuerdo acu where acu.idTipAcu = 4 ORDER BY acu.cveAcu");
+        Query query = session.createQuery("FROM Catacuerdo Acuerdo WHERE Acuerdo.idTipAcu = 4 ORDER BY Acuerdo.cveAcu ASC");
+        List<Catacuerdo> acuerdos = query.list();
+        session.close();
+        return acuerdos;
+    }
+
+    public List<Catacuerdo> getAcuerdosEstatales() {
+        SessionFactory factory = null;
+        Session session = null;
+        factory = HibernateUtil.getSessionFactory();
+        session = factory.openSession();
+        Query query = session.createQuery("FROM Catacuerdo Acuerdo WHERE Acuerdo.idTipAcu = 1 OR Acuerdo.idTipAcu = 2 ORDER BY Acuerdo.cveAcu ASC");
         List<Catacuerdo> acuerdos = query.list();
         session.close();
         return acuerdos;

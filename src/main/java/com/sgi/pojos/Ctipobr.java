@@ -69,7 +69,7 @@ public class Ctipobr implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Ctipobr[ idTipObr=" + idTipObr + " ]";
+        return nomTipObr;
     }
     
 }
