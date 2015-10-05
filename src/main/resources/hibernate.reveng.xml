@@ -40,4 +40,5 @@
   <table-filter match-name="cattipacu"/>
   <table-filter match-name="catparpol"/>
   <table-filter match-name="catacuerdo"/>
+  <table-filter match-name="psolicitud"/>
 </hibernate-reverse-engineering>

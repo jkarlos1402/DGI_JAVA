@@ -1,18 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catedosol")
-public class Catedosol implements Serializable {
+public class Catedosol implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -24,6 +25,9 @@ public class Catedosol implements Serializable {
     @Size(max = 20)
     @Column(name = "NomEdo")
     private String nomEdo;
+    
+    @OneToMany(mappedBy = "idEdoSol")
+    private List<Psolicitud> psolicitudList;
 
     public Catedosol() {
     }
@@ -48,6 +52,14 @@ public class Catedosol implements Serializable {
         this.nomEdo = nomEdo;
     }
 
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -71,6 +83,6 @@ public class Catedosol implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Catedosol[ idEdoSol=" + idEdoSol + " ]";
-    }
+    }    
     
 }

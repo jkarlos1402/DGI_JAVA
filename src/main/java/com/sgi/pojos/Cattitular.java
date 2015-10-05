@@ -1,17 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "cattitular")
-public class Cattitular implements Serializable {
+public class Cattitular implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -36,7 +38,12 @@ public class Cattitular implements Serializable {
     @Column(name = "CarTit")
     private String carTit;
         
-
+    @OneToMany(mappedBy = "idTit")
+    private List<Catue> catueList;
+    
+    @OneToMany(mappedBy = "idTit")
+    private List<Catsector> catsectorList;
+    
     public Cattitular() {
     }
 
@@ -84,6 +91,22 @@ public class Cattitular implements Serializable {
         this.carTit = carTit;
     }    
 
+    public List<Catue> getCatueList() {
+        return catueList;
+    }
+
+    public void setCatueList(List<Catue> catueList) {
+        this.catueList = catueList;
+    }
+
+    public List<Catsector> getCatsectorList() {
+        return catsectorList;
+    }
+
+    public void setCatsectorList(List<Catsector> catsectorList) {
+        this.catsectorList = catsectorList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,6 +130,6 @@ public class Cattitular implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Cattitular[ idTit=" + idTit + " ]";
-    }
+    }    
     
 }

@@ -7,7 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sgi_test_java?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.show_sql">false</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping class="com.sgi.pojos.Carea"/>
     <mapping class="com.sgi.pojos.Catclasec"/>
@@ -48,5 +48,6 @@
     <mapping class="com.sgi.pojos.Catparpol"/>
     <mapping class="com.sgi.pojos.Catmunicipio"/>
     <mapping class="com.sgi.pojos.Catacuerdo"/>
+    <mapping class="com.sgi.pojos.Psolicitud"/>
   </session-factory>
 </hibernate-configuration>

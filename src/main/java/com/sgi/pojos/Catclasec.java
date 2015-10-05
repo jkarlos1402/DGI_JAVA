@@ -1,19 +1,22 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catclasec")
-public class Catclasec implements Serializable {
+public class Catclasec implements Serializable {    
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idClaSec")
@@ -21,7 +24,10 @@ public class Catclasec implements Serializable {
 
     @Size(max = 20)
     @Column(name = "NomClaSec")
-    private String nomClaSec;    
+    private String nomClaSec;  
+    
+    @OneToMany(mappedBy = "idClaSec")
+    private List<Catue> catueList;
 
     public Catclasec() {
     }
@@ -46,6 +52,14 @@ public class Catclasec implements Serializable {
         this.nomClaSec = nomClaSec;
     }
 
+    public List<Catue> getCatueList() {
+        return catueList;
+    }
+
+    public void setCatueList(List<Catue> catueList) {
+        this.catueList = catueList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -69,6 +83,6 @@ public class Catclasec implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Catclasec[ idClaSec=" + idClaSec + " ]";
-    }
+    }    
 
 }

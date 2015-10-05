@@ -1,9 +1,11 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -20,6 +22,9 @@ public class Catejercicio implements Serializable {
     @Size(max = 100)
     @Column(name = "Frase")
     private String frase;
+
+    @OneToMany(mappedBy = "ejercicio")
+    private List<Psolicitud> psolicitudList;
 
     public Catejercicio() {
     }
@@ -44,6 +49,14 @@ public class Catejercicio implements Serializable {
         this.frase = frase;
     }
 
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -66,7 +79,7 @@ public class Catejercicio implements Serializable {
 
     @Override
     public String toString() {
-        return ejercicio+"";
-    }
+        return ejercicio + "";
+    }    
 
 }

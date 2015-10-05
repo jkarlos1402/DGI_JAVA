@@ -12,7 +12,7 @@ public class Catfte2015DAO {
         Session session = null;
         factory = HibernateUtil.getSessionFactory();
         session = factory.openSession();
-        Query query = session.createQuery("FROM Catfte2015 WHERE Catfte2015.TipoFte = 'F'");
+        Query query = session.createQuery("FROM Catfte2015 catFte WHERE catFte.tipoFte = 'F'");
         List<Catfte2015> fuentesFederales = query.list();
         session.close();
         return fuentesFederales;
@@ -23,7 +23,7 @@ public class Catfte2015DAO {
         Session session = null;
         factory = HibernateUtil.getSessionFactory();
         session = factory.openSession();
-        Query query = session.createQuery("FROM Catfte2015 WHERE Catfte2015.TipoFte = 'E'");
+        Query query = session.createQuery("FROM Catfte2015 catFte WHERE catFte.tipoFte = 'E'");
         List<Catfte2015> fuentesEstatales = query.list();
         session.close();
         return fuentesEstatales;

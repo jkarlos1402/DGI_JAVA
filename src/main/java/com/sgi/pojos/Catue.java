@@ -1,20 +1,21 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catue")
-public class Catue implements Serializable {
+public class Catue implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -25,18 +26,21 @@ public class Catue implements Serializable {
     
     @Size(max = 150)
     @Column(name = "NomUE")
-    private String nomUE;
-        
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    private String nomUE; 
+    
+    @OneToMany(mappedBy = "idUE")
+    private List<Psolicitud> psolicitudList;
+    
+    @JoinColumn(name = "IdSec", referencedColumnName = "IdSec")
+    @ManyToOne
     private Catsector idSec;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "IdClaSec", referencedColumnName = "idClaSec")
+    @ManyToOne
     private Catclasec idClaSec;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "IdTit", referencedColumnName = "IdTit")
+    @ManyToOne
     private Cattitular idTit;
 
     public Catue() {
@@ -86,6 +90,14 @@ public class Catue implements Serializable {
         this.idTit = idTit;
     }
 
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
+    }  
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -110,5 +122,5 @@ public class Catue implements Serializable {
     public String toString() {
         return "com.sgi.pojos.Catue[ idUE=" + idUE + " ]";
     }
-    
+      
 }

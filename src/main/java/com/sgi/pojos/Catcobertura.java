@@ -1,21 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author intel core i 7
- */
 @Entity
 @Table(name = "catcobertura")
-public class Catcobertura implements Serializable {
+public class Catcobertura implements Serializable {    
 
     private static final long serialVersionUID = 1L;
     
@@ -27,6 +25,9 @@ public class Catcobertura implements Serializable {
     @Size(max = 15)
     @Column(name = "NomCob")
     private String nomCob;
+    
+    @OneToMany(mappedBy = "idCob")
+    private List<Psolicitud> psolicitudList;
 
     public Catcobertura() {
     }
@@ -49,6 +50,14 @@ public class Catcobertura implements Serializable {
 
     public void setNomCob(String nomCob) {
         this.nomCob = nomCob;
+    }
+    
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
     }
 
     @Override
@@ -74,6 +83,6 @@ public class Catcobertura implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Catcobertura[ idCob=" + idCob + " ]";
-    }
+    }    
 
 }

@@ -1,18 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "cdepto")
-public class Cdepto implements Serializable {
+public class Cdepto implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -25,16 +26,19 @@ public class Cdepto implements Serializable {
     private String nomDpt;
     
     @Column(name = "Activo")
-    private Boolean activo;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    private Boolean activo;            
+
+    @JoinColumn(name = "idRes", referencedColumnName = "IdRes")
+    @ManyToOne
     private Catresarea idRes;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Carea idDir;       
-
+    @JoinColumn(name = "idDir", referencedColumnName = "idDir")
+    @ManyToOne
+    private Carea idDir;
+    
+    @OneToMany(mappedBy = "idDpt")
+    private List<Catsector> catsectorList;
+    
     public Cdepto() {
     }
 
@@ -82,6 +86,13 @@ public class Cdepto implements Serializable {
         this.idDir = idDir;
     }    
 
+    public List<Catsector> getCatsectorList() {
+        return catsectorList;
+    }
+
+    public void setCatsectorList(List<Catsector> catsectorList) {
+        this.catsectorList = catsectorList;
+    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -105,6 +116,6 @@ public class Cdepto implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Cdepto[ idDpt=" + idDpt + " ]";
-    }
+    }      
     
 }

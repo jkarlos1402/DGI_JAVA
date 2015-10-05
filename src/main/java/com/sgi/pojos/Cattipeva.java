@@ -1,17 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "cattipeva")
-public class Cattipeva implements Serializable {
+public class Cattipeva implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -32,6 +34,9 @@ public class Cattipeva implements Serializable {
     
     @Column(name = "MonFin")
     private Integer monFin;
+    
+    @OneToMany(mappedBy = "idTipEva")
+    private List<Psolicitud> psolicitudList;
 
     public Cattipeva() {
     }
@@ -80,6 +85,14 @@ public class Cattipeva implements Serializable {
         this.monFin = monFin;
     }
 
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -103,6 +116,6 @@ public class Cattipeva implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Cattipeva[ idTipEva=" + idTipEva + " ]";
-    }
+    }    
     
 }

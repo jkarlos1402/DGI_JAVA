@@ -1,17 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catresarea")
-public class Catresarea implements Serializable {
+public class Catresarea implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -36,6 +38,12 @@ public class Catresarea implements Serializable {
     @Column(name = "CarRes")
     private String carRes;        
 
+    @OneToMany(mappedBy = "idRes")
+    private List<Cdepto> cdeptoList;
+    
+    @OneToMany(mappedBy = "idRes")
+    private List<Carea> careaList;
+    
     public Catresarea() {
     }
 
@@ -82,6 +90,22 @@ public class Catresarea implements Serializable {
     public void setCarRes(String carRes) {
         this.carRes = carRes;
     }    
+    
+    public List<Cdepto> getCdeptoList() {
+        return cdeptoList;
+    }
+
+    public void setCdeptoList(List<Cdepto> cdeptoList) {
+        this.cdeptoList = cdeptoList;
+    }
+
+    public List<Carea> getCareaList() {
+        return careaList;
+    }
+
+    public void setCareaList(List<Carea> careaList) {
+        this.careaList = careaList;
+    }
 
     @Override
     public int hashCode() {
@@ -106,6 +130,6 @@ public class Catresarea implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Catresarea[ idRes=" + idRes + " ]";
-    }
+    }    
     
 }

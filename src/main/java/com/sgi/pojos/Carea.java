@@ -1,14 +1,15 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -17,20 +18,24 @@ import javax.validation.constraints.Size;
 public class Carea implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDir")
     private Integer idDir;
-    
+
     @Size(max = 200)
     @Column(name = "NomDir")
     private String nomDir;
-    
+
     @Column(name = "Activo")
-    private Boolean activo;    
-        
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    private Boolean activo;
+
+    @OneToMany(mappedBy = "idDir")
+    private List<Cdepto> cdeptoList;
+
+    @JoinColumn(name = "idRes", referencedColumnName = "IdRes")
+    @ManyToOne
     private Catresarea idRes;
 
     public Carea() {
@@ -62,7 +67,7 @@ public class Carea implements Serializable {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }   
+    }
 
     public Catresarea getIdRes() {
         return idRes;
@@ -70,6 +75,14 @@ public class Carea implements Serializable {
 
     public void setIdRes(Catresarea idRes) {
         this.idRes = idRes;
+    }
+
+    public List<Cdepto> getCdeptoList() {
+        return cdeptoList;
+    }
+
+    public void setCdeptoList(List<Cdepto> cdeptoList) {
+        this.cdeptoList = cdeptoList;
     }
 
     @Override

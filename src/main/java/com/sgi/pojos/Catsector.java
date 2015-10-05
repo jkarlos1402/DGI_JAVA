@@ -1,38 +1,45 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catsector")
 public class Catsector implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdSec")
     private Integer idSec;
-    
+
     @Size(max = 40)
     @Column(name = "NomSec")
-    private String nomSec;       
-        
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    private String nomSec;
+
+    @OneToMany(mappedBy = "idSec")
+    private List<Psolicitud> psolicitudList;
+    
+    @OneToMany(mappedBy = "idSec")
+    private List<Catue> catueList;
+    
+    @JoinColumn(name = "IdTit", referencedColumnName = "IdTit")
+    @ManyToOne
     private Cattitular idTit;
-        
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    
+    @JoinColumn(name = "IdDpt", referencedColumnName = "idDpt")
+    @ManyToOne
     private Cdepto idDpt;
 
     public Catsector() {
@@ -56,7 +63,7 @@ public class Catsector implements Serializable {
 
     public void setNomSec(String nomSec) {
         this.nomSec = nomSec;
-    }    
+    }
 
     public Cattitular getIdTit() {
         return idTit;
@@ -74,6 +81,22 @@ public class Catsector implements Serializable {
         this.idDpt = idDpt;
     }
 
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
+    }
+
+    public List<Catue> getCatueList() {
+        return catueList;
+    }
+
+    public void setCatueList(List<Catue> catueList) {
+        this.catueList = catueList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -97,6 +120,6 @@ public class Catsector implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Catsector[ idSec=" + idSec + " ]";
-    }
-    
+    }   
+
 }

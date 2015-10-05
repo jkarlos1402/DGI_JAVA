@@ -92,13 +92,7 @@
                                         <h:outputText value="#{hoja1Estudio.montoInversion}" />
                                     </h:panelGrid>  
                                     <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">
-                                        <p:dataTable id="fuentesFederales" var="fuenteFederal" value="#{fuentesInversion.fuentesFederalesSelected}" editable="true" style="margin-bottom:20px">
-                                            <f:facet name="header">
-                                                Fuente(s) federal(es)
-                                            </f:facet>
-                                            <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
-                                            <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
-                                        </p:dataTable>
+                                       
                                     </h:panelGrid>
                                 </p:panel>
                             </p:tab>                        

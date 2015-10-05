@@ -1,17 +1,19 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catgposoc")
-public class Catgposoc implements Serializable {
+public class Catgposoc implements Serializable {    
 
     private static final long serialVersionUID = 1L;
     
@@ -24,6 +26,9 @@ public class Catgposoc implements Serializable {
     @Column(name = "NomGpo")
     private String nomGpo;
 
+    @OneToMany(mappedBy = "idGpo")
+    private List<Psolicitud> psolicitudList;
+    
     public Catgposoc() {
     }
 
@@ -47,6 +52,14 @@ public class Catgposoc implements Serializable {
         this.nomGpo = nomGpo;
     }
 
+    public List<Psolicitud> getPsolicitudList() {
+        return psolicitudList;
+    }
+
+    public void setPsolicitudList(List<Psolicitud> psolicitudList) {
+        this.psolicitudList = psolicitudList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -70,6 +83,6 @@ public class Catgposoc implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Catgposoc[ idGpo=" + idGpo + " ]";
-    }
+    }    
 
 }
