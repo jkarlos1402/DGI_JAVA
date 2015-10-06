@@ -41,4 +41,6 @@
   <table-filter match-name="catparpol"/>
   <table-filter match-name="catacuerdo"/>
   <table-filter match-name="psolicitud"/>
+  <table-filter match-name="dsolfte"/>
+  <table-filter match-name="relsolfte"/>
 </hibernate-reverse-engineering>

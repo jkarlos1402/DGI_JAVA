@@ -24,9 +24,5 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/estudioSocioeconomico.xhtml</welcome-file>
-    </welcome-file-list>
-    <context-param>  
-        <param-name>primefaces.THEME</param-name>  
-        <param-value>bootstrap</param-value>  
-    </context-param> 
+    </welcome-file-list>    
 </web-app>

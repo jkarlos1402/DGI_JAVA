@@ -36,7 +36,7 @@ public class Hoja1Estudio implements Serializable {
     private List<Cmodeje> catalogoModEje;
     private Ctipobr tipoObraSelected;
     private List<Ctipobr> catalogoTipoObr;
-    private double montoInversion;
+    
 
     //para control UI
     private boolean skip;
@@ -58,14 +58,6 @@ public class Hoja1Estudio implements Serializable {
         catalogoModEje = (List<Cmodeje>)servletContext.getAttribute("catalogo_modo_ejecucion");
         
         catalogoTipoObr = (List<Ctipobr>)servletContext.getAttribute("catalogo_tipo_obra");
-    }
-
-    public double getMontoInversion() {
-        return montoInversion;
-    }
-
-    public void setMontoInversion(double montoInversion) {
-        this.montoInversion = montoInversion;
     }
 
     public Ctipobr getTipoObraSelected() {

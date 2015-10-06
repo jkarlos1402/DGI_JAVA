@@ -1,17 +1,20 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catfte2015")
-public class Catfte2015 implements Serializable {
+public class Catfte2015 implements Serializable {    
     
     private static final long serialVersionUID = 1L;
     
@@ -36,8 +39,11 @@ public class Catfte2015 implements Serializable {
     
     @Column(name = "DestGasto")
     private Short destGasto;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFte")
+    private List<Relsolfte> relsolfteList;
 
-    public Catfte2015() {
+    public Catfte2015() {        
     }
 
     public Catfte2015(Integer idFte) {
@@ -92,6 +98,14 @@ public class Catfte2015 implements Serializable {
         this.destGasto = destGasto;
     }
 
+    public List<Relsolfte> getRelsolfteList() {
+        return relsolfteList;
+    }
+
+    public void setRelsolfteList(List<Relsolfte> relsolfteList) {
+        this.relsolfteList = relsolfteList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -114,7 +128,7 @@ public class Catfte2015 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catfte2015[ idFte=" + idFte + " ]";
-    }
+        return dscFte;
+    }    
     
 }

@@ -89,10 +89,38 @@
                                         </p:selectOneMenu>
 
                                         <h:outputText value="Monto de la inversi&oacute;n: "/>
-                                        <h:outputText value="#{hoja1Estudio.montoInversion}" />
+                                        <h:outputText value="#{fuentesInversion.montoInversion}" id="montoInversion"/>
                                     </h:panelGrid>  
-                                    <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">
-                                       
+                                    <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">                                        
+                                        <p:dataTable id="fuentesFederales" var="fuenteFederal" value="#{fuentesInversion.fuentesFederalesSelected}" editable="true" style="margin-bottom:20px"
+                                                     >
+                                            <f:facet name="header">
+                                                Fuente(s) federal(es)
+                                            </f:facet>
+                                            <p:ajax event="rowEdit" listener="#{fuentesInversion.onRowEdit}" update="fuentesFederales"/>
+                                            <p:ajax event="rowEditCancel" listener="#{fuentesInversion.onRowCancel}" update="fuentesFederales" />
+                                            <p:column headerText="Monto">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{fuenteFederal.dsolfte.monto}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText id="modelInput" value="#{fuenteFederal.dsolfte.monto}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column headerText="Fuente">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{fuenteFederal.idFte.dscFte}" /></f:facet>
+                                                    <f:facet name="input">
+                                                        <p:selectOneMenu id="ftesFederalesBco" value="#{fuenteFederal.idFte}" required="true" converter="ftesFederalesConverter" label="Fuentes federales">
+                                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                                            <f:selectItems value="#{fuentesInversion.fuentesFederales}" />
+                                                        </p:selectOneMenu>
+                                                    </f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
+                                        </p:dataTable>                                        
+                                        <p:commandButton value="Agregar" type="button" onclick="PF('dialogAddFuenteFed').show();" />
                                     </h:panelGrid>
                                 </p:panel>
                             </p:tab>                        
@@ -105,8 +133,32 @@
                         </p:wizard>
                     </div>                                                          
                 </div>
-            </div>
-        </h:form>        
+            </div> 
+            <p:dialog header="Agregar fuente al proyecto" widgetVar="dialogAddFuenteFed" minHeight="40" modal="true">
+                <h:messages />
+                <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
+                    <h:outputLabel value="Fuente:*" for="ftesFederalesBcoDialog"/>
+                    <p:selectOneMenu id="ftesFederalesBcoDialog" value="#{fuentesInversion.relFteFed.idFte}" required="true" converter="ftesFederalesConverter" label="Fuentes federales">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItems value="#{fuentesInversion.fuentesFederales}" />
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Monto:*" for="montoFteFedDialog"/>
+                    <h:inputText value="#{fuentesInversion.relFteFed.dsolfte.monto}" id="montoFteFedDialog" label="Monto de la fuente"/>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Acpetar" update="fuentesFederales,montoInversion,msgAcciones,ftesFederalesBcoDialog,montoFteFedDialog" actionListener="#{fuentesInversion.addRelFte}" oncomplete="handleResponse(xhr, status, args)"/>
+                    </f:facet>  
+                </h:panelGrid>                
+            </p:dialog>
+        </h:form>
+        <script type="text/javascript">
+            function handleResponse(xhr, status, args) {
+                if (args.aceptado) {
+                    PF('dialogAddFuenteFed').hide();
+                }
+            }
+        </script>
     </h:body>
 </html>
 

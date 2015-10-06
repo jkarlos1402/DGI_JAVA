@@ -49,5 +49,7 @@
     <mapping class="com.sgi.pojos.Catmunicipio"/>
     <mapping class="com.sgi.pojos.Catacuerdo"/>
     <mapping class="com.sgi.pojos.Psolicitud"/>
+    <mapping class="com.sgi.pojos.Dsolfte"/>
+    <mapping class="com.sgi.pojos.Relsolfte"/>
   </session-factory>
 </hibernate-configuration>
