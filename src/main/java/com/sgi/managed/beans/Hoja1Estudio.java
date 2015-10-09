@@ -2,6 +2,8 @@ package com.sgi.managed.beans;
 
 import com.sgi.pojos.Catacuerdo;
 import com.sgi.pojos.Catejercicio;
+import com.sgi.pojos.Catgposoc;
+import com.sgi.pojos.Catmeta;
 import com.sgi.pojos.Catsector;
 import com.sgi.pojos.Catue;
 import com.sgi.pojos.Cmodeje;
@@ -36,8 +38,13 @@ public class Hoja1Estudio implements Serializable {
     private List<Cmodeje> catalogoModEje;
     private Ctipobr tipoObraSelected;
     private List<Ctipobr> catalogoTipoObr;
+    private String principalesCaract;
+    private List<Catgposoc> catalogoGruposSoc;
+    private Catgposoc grupoSocSelected;
+    private List<Catmeta> catalogoMetas;
+    private Catmeta metaSelected;
+    private double cantidadMetas;
     
-
     //para control UI
     private boolean skip;
     private DualListModel<Catacuerdo> accionesFederales;
@@ -58,6 +65,58 @@ public class Hoja1Estudio implements Serializable {
         catalogoModEje = (List<Cmodeje>)servletContext.getAttribute("catalogo_modo_ejecucion");
         
         catalogoTipoObr = (List<Ctipobr>)servletContext.getAttribute("catalogo_tipo_obra");
+        
+        catalogoGruposSoc = (List<Catgposoc>)servletContext.getAttribute("catalogo_grupos_sociales");
+        
+        catalogoMetas = (List<Catmeta>)servletContext.getAttribute("catalogo_metas");
+    }
+
+    public double getCantidadMetas() {
+        return cantidadMetas;
+    }
+
+    public void setCantidadMetas(double cantidadMetas) {
+        this.cantidadMetas = cantidadMetas;
+    }
+
+    public List<Catmeta> getCatalogoMetas() {
+        return catalogoMetas;
+    }
+
+    public void setCatalogoMetas(List<Catmeta> catalogoMetas) {
+        this.catalogoMetas = catalogoMetas;
+    }
+
+    public Catmeta getMetaSelected() {
+        return metaSelected;
+    }
+
+    public void setMetaSelected(Catmeta metaSelected) {
+        this.metaSelected = metaSelected;
+    }
+
+    public List<Catgposoc> getCatalogoGruposSoc() {
+        return catalogoGruposSoc;
+    }
+
+    public void setCatalogoGruposSoc(List<Catgposoc> catalogoGruposSoc) {
+        this.catalogoGruposSoc = catalogoGruposSoc;
+    }
+
+    public Catgposoc getGrupoSocSelected() {
+        return grupoSocSelected;
+    }
+
+    public void setGrupoSocSelected(Catgposoc grupoSocSelected) {
+        this.grupoSocSelected = grupoSocSelected;
+    }
+
+    public String getPrincipalesCaract() {
+        return principalesCaract;
+    }
+
+    public void setPrincipalesCaract(String principalesCaract) {
+        this.principalesCaract = principalesCaract;
     }
 
     public Ctipobr getTipoObraSelected() {

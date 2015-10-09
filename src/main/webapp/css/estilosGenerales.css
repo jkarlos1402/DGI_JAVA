@@ -1,3 +1,11 @@
 .etiqueta{
     text-align: right;
 }
+
+.footerTable{
+    text-align: left;
+}
+
+body{
+    font-size: 12px;
+}

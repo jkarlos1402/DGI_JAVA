@@ -10,8 +10,8 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 import javax.servlet.ServletContext;
 
-@FacesConverter("ftesFederalesConverter")
-public class FtesFederalesConverter implements Converter{
+@FacesConverter("ftesEstatalesConverter")
+public class FtesEstatalesConverter implements Converter{
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {                  
         if (value != null && value.trim().length() > 0) {
@@ -19,14 +19,14 @@ public class FtesFederalesConverter implements Converter{
                 Catfte2015 fuenteT = new Catfte2015();
                 fuenteT.setIdFte(new Integer(value));
                 ServletContext sc = (ServletContext) context.getExternalContext().getContext();
-                List<Catfte2015> fuentes = (List<Catfte2015>) sc.getAttribute("catalogo_fuentes_federales");
+                List<Catfte2015> fuentes = (List<Catfte2015>) sc.getAttribute("catalogo_fuentes_estatales");
                 for (Catfte2015 fuente : fuentes) {
                     if (fuente.equals(fuenteT)) {
                         return fuente;
                     }
                 }
             } catch (NumberFormatException e) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fuentes federales", "Seleccione una opci\u00f3n"));
+                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fuentes estatales", "Seleccione una opci\u00f3n"));
             }
             return null;
         } else {

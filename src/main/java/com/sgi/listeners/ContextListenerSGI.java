@@ -3,9 +3,10 @@ package com.sgi.listeners;
 import com.sgi.dao.CatacuerdoDAO;
 import com.sgi.dao.CatejercicioDAO;
 import com.sgi.dao.Catfte2015DAO;
+import com.sgi.dao.CatgposocDAO;
+import com.sgi.dao.CatmetaDAO;
 import com.sgi.dao.CmodejeDAO;
 import com.sgi.dao.CtipObrDAO;
-import com.sgi.pojos.Catejercicio;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -32,6 +33,12 @@ public class ContextListenerSGI implements ServletContextListener {
         Catfte2015DAO catfte2015DAO = new Catfte2015DAO();
         sc.setAttribute("catalogo_fuentes_federales", catfte2015DAO.getFuentesFederales());
         sc.setAttribute("catalogo_fuentes_estatales", catfte2015DAO.getFuentesEstatales());
+        
+        CatgposocDAO catgposocDAO = new CatgposocDAO();
+        sc.setAttribute("catalogo_grupos_sociales", catgposocDAO.getGruposSociales());
+        
+        CatmetaDAO catmetaDAO = new CatmetaDAO();
+        sc.setAttribute("catalogo_metas", catmetaDAO.getMetas());
     }
 
     @Override

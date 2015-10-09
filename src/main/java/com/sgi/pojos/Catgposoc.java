@@ -82,7 +82,7 @@ public class Catgposoc implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catgposoc[ idGpo=" + idGpo + " ]";
+        return nomGpo;
     }    
 
 }

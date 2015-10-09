@@ -13,32 +13,32 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "relsolfte")
 public class Relsolfte implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
-    @Id    
+
+    @Id
     @NotNull
     @Column(name = "iddsolfte")
     private Integer iddsolfte;
-    
+
     @JoinColumn(name = "idSol", referencedColumnName = "IdSol")
     @ManyToOne(optional = false)
     private Psolicitud idSol;
-    
+
     @JoinColumn(name = "idFte", referencedColumnName = "idFte")
     @ManyToOne(optional = false)
     private Catfte2015 idFte;
-    
+
     @JoinColumn(name = "iddsolfte", referencedColumnName = "iddsolfte", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Dsolfte dsolfte;
+    private Dsolfte dsolfte;   
 
-    public Relsolfte() {
+    public Relsolfte() {        
     }
 
     public Relsolfte(Integer iddsolfte) {
-        this.iddsolfte = iddsolfte;
-    }
+        this.iddsolfte = iddsolfte;        
+    }   
 
     public Integer getIddsolfte() {
         return iddsolfte;
@@ -80,13 +80,12 @@ public class Relsolfte implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+    public boolean equals(Object object) {        
         if (!(object instanceof Relsolfte)) {
             return false;
         }
         Relsolfte other = (Relsolfte) object;
-        if ((this.iddsolfte == null && other.iddsolfte != null) || (this.iddsolfte != null && !this.iddsolfte.equals(other.iddsolfte))) {
+        if ((this.idFte.getIdFte() == null && other.idFte.getIdFte() != null) || (this.idFte.getIdFte() != null && !this.idFte.getIdFte().equals(other.idFte.getIdFte()))) {
             return false;
         }
         return true;
@@ -96,5 +95,5 @@ public class Relsolfte implements Serializable {
     public String toString() {
         return "com.sgi.pojos.Relsolfte[ iddsolfte=" + iddsolfte + " ]";
     }
-    
+
 }
