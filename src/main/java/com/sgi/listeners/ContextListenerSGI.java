@@ -1,6 +1,7 @@
 package com.sgi.listeners;
 
 import com.sgi.dao.CatacuerdoDAO;
+import com.sgi.dao.CatbeneficiarioDAO;
 import com.sgi.dao.CatejercicioDAO;
 import com.sgi.dao.Catfte2015DAO;
 import com.sgi.dao.CatgposocDAO;
@@ -39,6 +40,9 @@ public class ContextListenerSGI implements ServletContextListener {
         
         CatmetaDAO catmetaDAO = new CatmetaDAO();
         sc.setAttribute("catalogo_metas", catmetaDAO.getMetas());
+        
+        CatbeneficiarioDAO catbeneficiarioDAO = new CatbeneficiarioDAO();
+        sc.setAttribute("catalogo_beneficiarios", catbeneficiarioDAO.getBeneficiarios());
     }
 
     @Override

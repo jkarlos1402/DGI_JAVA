@@ -1,6 +1,7 @@
 package com.sgi.managed.beans;
 
 import com.sgi.pojos.Catacuerdo;
+import com.sgi.pojos.Catbeneficiario;
 import com.sgi.pojos.Catejercicio;
 import com.sgi.pojos.Catgposoc;
 import com.sgi.pojos.Catmeta;
@@ -44,6 +45,11 @@ public class Hoja1Estudio implements Serializable {
     private List<Catmeta> catalogoMetas;
     private Catmeta metaSelected;
     private double cantidadMetas;
+    private List<Catbeneficiario> catalogoBeneficiarios;
+    private Catbeneficiario beneficiarioSelected;
+    private double cantidadBeneficiarios;
+    private int anhosObr;    
+    private int mesesObr;    
     
     //para control UI
     private boolean skip;
@@ -69,6 +75,48 @@ public class Hoja1Estudio implements Serializable {
         catalogoGruposSoc = (List<Catgposoc>)servletContext.getAttribute("catalogo_grupos_sociales");
         
         catalogoMetas = (List<Catmeta>)servletContext.getAttribute("catalogo_metas");
+        
+        catalogoBeneficiarios = (List<Catbeneficiario>)servletContext.getAttribute("catalogo_beneficiarios");
+    }
+
+    public int getAnhosObr() {
+        return anhosObr;
+    }
+
+    public void setAnhosObr(int anhosObr) {
+        this.anhosObr = anhosObr;
+    }
+
+    public int getMesesObr() {
+        return mesesObr;
+    }
+
+    public void setMesesObr(int mesesObr) {
+        this.mesesObr = mesesObr;
+    }
+
+    public List<Catbeneficiario> getCatalogoBeneficiarios() {
+        return catalogoBeneficiarios;
+    }
+
+    public void setCatalogoBeneficiarios(List<Catbeneficiario> catalogoBeneficiarios) {
+        this.catalogoBeneficiarios = catalogoBeneficiarios;
+    }
+
+    public Catbeneficiario getBeneficiarioSelected() {
+        return beneficiarioSelected;
+    }
+
+    public void setBeneficiarioSelected(Catbeneficiario beneficiarioSelected) {
+        this.beneficiarioSelected = beneficiarioSelected;
+    }
+
+    public double getCantidadBeneficiarios() {
+        return cantidadBeneficiarios;
+    }
+
+    public void setCantidadBeneficiarios(double cantidadBeneficiarios) {
+        this.cantidadBeneficiarios = cantidadBeneficiarios;
     }
 
     public double getCantidadMetas() {

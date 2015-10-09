@@ -96,7 +96,7 @@ public class Catmeta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catmeta[ idMet=" + idMet + " ]";
+        return nomMet;
     }    
 
 }

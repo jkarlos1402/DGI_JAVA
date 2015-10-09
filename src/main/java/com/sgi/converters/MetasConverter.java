@@ -1,6 +1,5 @@
 package com.sgi.converters;
 
-import com.sgi.pojos.Catfte2015;
 import com.sgi.pojos.Catmeta;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -38,7 +37,7 @@ public class MetasConverter implements Converter{
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            if (value instanceof Catfte2015) {
+            if (value instanceof Catmeta) {
                 Catmeta meta = (Catmeta) value;
                 return meta.getIdMet()+ "";
             }else{

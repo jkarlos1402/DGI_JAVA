@@ -192,14 +192,43 @@
                                     <h3>Metas a lograr</h3>
                                     <h:panelGrid columns="4" columnClasses="etiqueta,valor,etiqueta,valor" cellpadding="5px">
                                         <h:outputLabel value="U. medida:*" for="uMedidaMetasBco"/>
-                                        <p:selectOneMenu id="uMedidaMetasBco" value="#{hoja1Estudio.metaSelected}" converter="gruposSocialesConverter" label="Unidad de medida de las metas" required="true">
+                                        <p:selectOneMenu id="uMedidaMetasBco" value="#{hoja1Estudio.metaSelected}" converter="metasConverter" label="Unidad de medida de las metas" required="true">
                                             <f:selectItem itemLabel="Seleccione" itemValue="" />
                                             <f:selectItems value="#{hoja1Estudio.catalogoMetas}" />
                                         </p:selectOneMenu>
                                         <h:outputLabel value="Cantidad:*" for="canMetasBco"/>
-                                        <h:inputTextarea value="#{hoja1Estudio.cantidadMetas}" id="canMetasBco" label="Principales caracter&iacute;sticas" required="true"/>
-                                        
-                                        
+                                        <h:inputText value="#{hoja1Estudio.cantidadMetas}" id="canMetasBco" label="Cantidad de metas" required="true"/>                                                                                
+                                    </h:panelGrid>
+                                    <h3>Beneficiarios</h3>
+                                    <h:panelGrid columns="4" columnClasses="etiqueta,valor,etiqueta,valor" cellpadding="5px">
+                                        <h:outputLabel value="U. medida:" for="uMedidaBenBco"/>
+                                        <p:selectOneMenu id="uMedidaBenBco" value="#{hoja1Estudio.beneficiarioSelected}" converter="beneficiariosConverter" label="Unidad de medida de los beneficiarios">
+                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                            <f:selectItems value="#{hoja1Estudio.catalogoBeneficiarios}" />
+                                        </p:selectOneMenu>
+                                        <h:outputLabel value="Cantidad:" for="canBenBco"/>
+                                        <h:inputText value="#{hoja1Estudio.cantidadBeneficiarios}" id="canBenBco" label="Cantidad de beneficiarios"/>                                                                                
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="5" columnClasses="etiqueta,etiqueta,valor,etiqueta,valor" cellpadding="5px">
+                                        <h:outputText value="Duraci&oacute;n de la obra"/>
+                                        <h:outputLabel value="A&ntilde;os:*" for="anhosObraBco"/>
+                                        <h:inputText value="#{hoja1Estudio.anhosObr}" id="anhosObraBco" label="A&ntilde;os"/>                         
+                                        <h:outputLabel value="Meses:*" for="mesesObraBco"/>
+                                        <p:selectOneMenu id="mesesObraBco" value="#{hoja1Estudio.mesesObr}" label="Meses">
+                                            <f:selectItem itemLabel="Seleccione" itemValue="" />                                            
+                                            <f:selectItem itemLabel="0" itemValue="0" />                                            
+                                            <f:selectItem itemLabel="1" itemValue="1" />                                            
+                                            <f:selectItem itemLabel="2" itemValue="2" />                                            
+                                            <f:selectItem itemLabel="3" itemValue="3" />                                            
+                                            <f:selectItem itemLabel="4" itemValue="4" />                                            
+                                            <f:selectItem itemLabel="5" itemValue="5" />                                            
+                                            <f:selectItem itemLabel="6" itemValue="6" />                                            
+                                            <f:selectItem itemLabel="7" itemValue="7" />                                            
+                                            <f:selectItem itemLabel="8" itemValue="8" />                                            
+                                            <f:selectItem itemLabel="9" itemValue="9" />                                            
+                                            <f:selectItem itemLabel="10" itemValue="10" />                                            
+                                            <f:selectItem itemLabel="11" itemValue="11" />                                            
+                                        </p:selectOneMenu>                                         
                                     </h:panelGrid>
                                 </p:panel>
                             </p:tab>                        

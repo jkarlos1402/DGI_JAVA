@@ -82,7 +82,7 @@ public class Catbeneficiario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catbeneficiario[ idBen=" + idBen + " ]";
+        return nomBen;
     }    
     
 }
