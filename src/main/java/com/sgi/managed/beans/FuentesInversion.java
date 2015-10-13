@@ -5,7 +5,6 @@ import com.sgi.pojos.Dsolfte;
 import com.sgi.pojos.Psolicitud;
 import com.sgi.pojos.Relsolfte;
 import java.io.Serializable;
-;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;

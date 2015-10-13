@@ -19,7 +19,7 @@
                         <p:fieldset legend="B&uacute;squeda" style="margin-bottom:20px">
                             <h:panelGrid columns="4" cellpadding="5">
                                 <h:outputLabel for="noBcoBusqueda" value="No. Banco de proyectos"/>
-                                <h:inputText id="noBcoBusqueda" />
+                                <h:inputText id="noBcoBusqueda"/>
                                 <h:commandButton value="Buscar"/>
                                 <h:commandButton value="Limpiar"/>
                             </h:panelGrid>
@@ -32,7 +32,7 @@
                         <p:wizard flowListener="#{hoja1Estudio.onFlowProcess}">
                             <p:tab id="hoja1Bco" title="Hoja 1">
                                 <p:panel header="Hoja 1">
-                                    <p:messages />
+                                    <p:messages id="mensajesHoja1"/>
                                     <p:growl id="msgAcciones" showDetail="true" escape="false" />
                                     <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
                                         <h:outputText value="No. Banco de Proyectos: "/>
@@ -45,7 +45,9 @@
                                         </p:selectOneMenu>
 
                                         <h:outputLabel value="Vida &uacute;til del proyecto (A&ntilde;os):" for="vidaUtil"/>
-                                        <h:inputText value="#{hoja1Estudio.vidaUtil}" id="vidaUtil" label="Vida &uacute;til del proyecto"/>
+                                        <h:inputText value="#{hoja1Estudio.vidaUtil}" id="vidaUtil" label="Vida &uacute;til del proyecto">
+                                            <f:validateLongRange minimum="1" maximum="100"></f:validateLongRange>
+                                        </h:inputText>
 
                                         <h:outputLabel value="Nombre de la obra:*" for="nomObrBco"/>
                                         <h:inputTextarea value="#{hoja1Estudio.nombreObra}" id="nomObrBco" required="true" label="Nombre de la obra"/>
@@ -59,7 +61,7 @@
                                     </h:panelGrid>
                                     <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">                                        
                                         <h3 style="margin-top: 0">Acciones de Gobierno Federal</h3>
-                                        <p:pickList id="pickListAccionesF" value="#{hoja1Estudio.accionesFederales}" var="accionesFederales" itemLabel="#{accionesFederales}" itemValue="#{accionesFederales}" >
+                                        <p:pickList id="pickListAccionesF" value="#{hoja1Estudio.accionesFederales}" var="accionesFederales" itemLabel="#{accionesFederales}" itemValue="#{accionesFederales}">
                                             <f:facet name="sourceCaption">Disponibles</f:facet>
                                             <f:facet name="targetCaption">Seleccionados</f:facet>
                                             <p:ajax event="select" listener="#{hoja1Estudio.onSelect}" update="msgAcciones" />
@@ -182,7 +184,7 @@
                                     <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
                                         <h:outputLabel value="Principales caracter&iacute;sticas:*" for="priCarBco"/>
                                         <h:inputTextarea value="#{hoja1Estudio.principalesCaract}" id="priCarBco" label="Principales caracter&iacute;sticas" required="true"/>
-                                        
+
                                         <h:outputLabel value="Grupo social:" for="gpoSocBco"/>
                                         <p:selectOneMenu id="gpoSocBco" value="#{hoja1Estudio.grupoSocSelected}" converter="gruposSocialesConverter" label="Grupo social">
                                             <f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -230,6 +232,342 @@
                                             <f:selectItem itemLabel="11" itemValue="11" />                                            
                                         </p:selectOneMenu>                                         
                                     </h:panelGrid>
+                                    <h3>Factibilidades</h3>
+                                    <p:accordionPanel>
+                                        <p:tab title="Factibilidad Legal">
+                                            <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5">
+                                                <h:outputText value="Liberaci&oacute;n de Derecho de V&iacute;a:"/>
+                                                <p:selectOneRadio id="facLegDerVia" value="#{factibilidades.libder}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Liberaci&oacute;n del Terreno (libre de gravamen):"/>
+                                                <p:selectOneRadio id="facLegLibTer" value="#{factibilidades.libter}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de CFE:"/>
+                                                <p:selectOneRadio id="facLegPerCFE" value="#{factibilidades.cfe}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de TELMEX:"/>
+                                                <p:selectOneRadio id="facLegPerTel" value="#{factibilidades.telmex}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de PEMEX:"/>
+                                                <p:selectOneRadio id="facLegPerPEMx" value="#{factibilidades.pemex}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos del INAH:"/>
+                                                <p:selectOneRadio id="facLegPerINAH" value="#{factibilidades.inah}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos del INBA:"/>
+                                                <p:selectOneRadio id="facLegPerINBA" value="#{factibilidades.inba}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Autorizaci&oacute;n de la SEP:"/>
+                                                <p:selectOneRadio id="facLegPerSEP" value="#{factibilidades.sep}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4"/>
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos del ISEM:"/>
+                                                <p:selectOneRadio id="facLegPerISEM" value="#{factibilidades.isem}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de CONAGUA:"/>
+                                                <p:selectOneRadio id="facLegPerCONAGUA" value="#{factibilidades.conagua}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Registro de Marcas:"/>
+                                                <p:selectOneRadio id="facLegRegMarcas" value="#{factibilidades.marcas}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Uso del Producto:"/>
+                                                <p:selectOneRadio id="facLegUsoProd" value="#{factibilidades.producto}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de CAEM:"/>
+                                                <p:selectOneRadio id="facLegPerCAEM" value="#{factibilidades.caem}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de la JC:"/>
+                                                <p:selectOneRadio id="facLegPerJC" value="#{factibilidades.jc}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permisos de la Autoridad Municipal:"/>
+                                                <p:selectOneRadio id="facLegPerMun" value="#{factibilidades.autmun}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                            </h:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Factibilidad Ambiental">
+                                            <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5">
+                                                <h3>Cambio de Uso de Suelo</h3>
+                                                <h:outputText/>
+                                                
+                                                <h:outputText value="Tr&aacute;mite Unificado de Cambio de Uso de Suelo Forestal. Modalidad A:"/>
+                                                <p:selectOneRadio id="facAmbCUSFMA" value="#{factibilidades.moda}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Solicitud de Autorizaci&oacute;n de Cambio de Uso de Suelo en Terrenos Forestales:"/>
+                                                <p:selectOneRadio id="facAmbCUSTF" value="#{factibilidades.solautcu}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h3>Manifestaci&oacute;n de Impacto Ambiental</h3>
+                                                <h:outputText/>
+                                                
+                                                <h:outputText value="MIA con riesgo:"/>
+                                                <p:selectOneRadio id="facAmbMIARiesgo" value="#{factibilidades.miariesgo}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="MIA Particular:"/>
+                                                <p:selectOneRadio id="facAmbMIAParticular" value="#{factibilidades.miapart}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="MIA Particular con Riesgo:"/>
+                                                <p:selectOneRadio id="facAmbMIAParticularRiesgo" value="#{factibilidades.miapr}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Informe Preventivo:"/>
+                                                <p:selectOneRadio id="facAmbInfPre" value="#{factibilidades.infpre}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Certificaci&oacute;n Ambiental:"/>
+                                                <p:selectOneRadio id="facAmbCertAmb" value="#{factibilidades.camb}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h3>Modificaciones Extenciones y Avisos</h3>
+                                                <h:outputText/>
+                                                
+                                                <h:outputText value="Aviso de Desistimiento de la Autorizaci&oacute;n en Materia de Impacto Ambiental:"/>
+                                                <p:selectOneRadio id="facAmbAMIA" value="#{factibilidades.aamia}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Aviso de Cambio de Titularidad de la Autorizaci&oacute;n de Impacto Ambiental:"/>
+                                                <p:selectOneRadio id="facAmbCTAIA" value="#{factibilidades.actamia}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Aviso de No Requerimiento de Autorizaci&oacute;n en Materia de Impacto Ambiental:"/>
+                                                <p:selectOneRadio id="facAmbANRAMIA" value="#{factibilidades.anramia}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Solicitud de Exenci&oacute;n de la Presentaci&oacute;n de la Manifestaci&oacute;n de Impacto Ambiental:"/>
+                                                <p:selectOneRadio id="facAmbSEPMIA" value="#{factibilidades.sepmia}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Modificaciones a Proyectos Autorizados en Materia de Impacto Ambiental:"/>
+                                                <p:selectOneRadio id="facAmbMPAMIA" value="#{factibilidades.mpamia}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permiso para la Combusti&oacute;n a Cielo Abierto:"/>
+                                                <p:selectOneRadio id="facAmbPCCA" value="#{factibilidades.pcca}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Autorizaci&oacute;n para la Transferencia de Sitios Contaminados con Residuos Peligrosos:"/>
+                                                <p:selectOneRadio id="facAmbATSCRP" value="#{factibilidades.atscrp}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Salud Forestal:"/>
+                                                <p:selectOneRadio id="facAmbSaludFor" value="#{factibilidades.salfor}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Permiso de Liberaci&oacute;n Comercial al Ambiente:"/>
+                                                <p:selectOneRadio id="facAmbALCA" value="#{factibilidades.plca}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Aprovechamiento Forestal:"/>
+                                                <p:selectOneRadio id="facAmbAprovFor" value="#{factibilidades.apfo}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                            </h:panelGrid>
+                                        </p:tab>
+                                        <p:tab title="Factibilidad T&eacute;cnica">
+                                            <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5">
+                                                <h:outputText value="Anteproyecto:"/>
+                                                <p:selectOneRadio id="facTecAnteproy" value="#{factibilidades.antpry}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Proyecto Ejecutivo:"/>
+                                                <p:selectOneRadio id="facTecPryEje" value="#{factibilidades.pryeje}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Mecánica de Suelos:"/>
+                                                <p:selectOneRadio id="facTecMecSuelos" value="#{factibilidades.mecsue}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Estudio Hidrológico:"/>
+                                                <p:selectOneRadio id="facTecEstHidro" value="#{factibilidades.esth}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Estudio Topogr&aacute;fico:"/>
+                                                <p:selectOneRadio id="facTecEstTopo" value="#{factibilidades.estt}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="Estudio de Ingenier&iacute;a de Tr&aacute;nsito:"/>
+                                                <p:selectOneRadio id="facTecEIT" value="#{factibilidades.estit}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>
+                                                
+                                                <h:outputText value="T&eacute;rminos de Referencia:"/>
+                                                <p:selectOneRadio id="facTecTerRef" value="#{factibilidades.terref}">
+                                                    <f:selectItem itemLabel="S&iacute;" itemValue="1" />
+                                                    <f:selectItem itemLabel="No" itemValue="2" />
+                                                    <f:selectItem itemLabel="En proceso" itemValue="3" />
+                                                    <f:selectItem itemLabel="N/A" itemValue="4" />
+                                                </p:selectOneRadio>                                                
+                                            </h:panelGrid>
+                                        </p:tab>
+                                    </p:accordionPanel>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Guardar" id="guardarHoja1Bco" update="msgAcciones,mensajesHoja1" actionListener="#{hoja1Estudio.saveHoja1Bco}" styleClass="ui-priority-primary" />
+                                    </f:facet>
                                 </p:panel>
                             </p:tab>                        
                             <p:tab id="hoja2Bco" title="Hoja 2">
@@ -239,6 +577,7 @@
                                 </p:panel>
                             </p:tab>                        
                         </p:wizard>
+                        <h:outputText value="* Campos obligatorios."/>
                     </div>                                                          
                 </div>
             </div>             

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -30,7 +31,7 @@ public class Hoja1Estudio implements Serializable {
     private Short noBanco;
     private Catejercicio ejercicioSelected;
     private List<Catejercicio> catalogoEjericios;
-    private int vidaUtil;
+    private Integer vidaUtil;
     private String nombreObra;
     private Catue unidadEjecutora;
     private Catsector sector;
@@ -49,7 +50,10 @@ public class Hoja1Estudio implements Serializable {
     private Catbeneficiario beneficiarioSelected;
     private double cantidadBeneficiarios;
     private int anhosObr;    
-    private int mesesObr;    
+    private int mesesObr;   
+    
+    @ManagedProperty("#{fuentesInversion}")
+    FuentesInversion fuentesInversion;
     
     //para control UI
     private boolean skip;
@@ -247,11 +251,11 @@ public class Hoja1Estudio implements Serializable {
         this.catalogoEjericios = catalogoEjericios;
     }
 
-    public int getVidaUtil() {
+    public Integer getVidaUtil() {
         return vidaUtil;
     }
 
-    public void setVidaUtil(int vidaUtil) {
+    public void setVidaUtil(Integer vidaUtil) {
         this.vidaUtil = vidaUtil;
     }
 
@@ -310,5 +314,9 @@ public class Hoja1Estudio implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
     }
-
+    
+    public void saveHoja1Bco(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion guardada", ""));
+    }
 }
