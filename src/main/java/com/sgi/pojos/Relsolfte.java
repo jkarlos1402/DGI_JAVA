@@ -14,12 +14,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "relsolfte")
 public class Relsolfte implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @NotNull
-    @Column(name = "iddsolfte")
-    private Integer iddsolfte;
+    private static final long serialVersionUID = 1L;    
 
     @JoinColumn(name = "idSol", referencedColumnName = "IdSol")
     @ManyToOne(optional = false)
@@ -28,25 +23,14 @@ public class Relsolfte implements Serializable {
     @JoinColumn(name = "idFte", referencedColumnName = "idFte")
     @ManyToOne(optional = false)
     private Catfte2015 idFte;
-
-    @JoinColumn(name = "iddsolfte", referencedColumnName = "iddsolfte", insertable = false, updatable = false)
+    
+    @Id
+    @JoinColumn(name = "iddsolfte")
     @OneToOne(optional = false)
     private Dsolfte dsolfte;   
 
     public Relsolfte() {        
-    }
-
-    public Relsolfte(Integer iddsolfte) {
-        this.iddsolfte = iddsolfte;        
     }   
-
-    public Integer getIddsolfte() {
-        return iddsolfte;
-    }
-
-    public void setIddsolfte(Integer iddsolfte) {
-        this.iddsolfte = iddsolfte;
-    }
 
     public Psolicitud getIdSol() {
         return idSol;
@@ -70,14 +54,7 @@ public class Relsolfte implements Serializable {
 
     public void setDsolfte(Dsolfte dsolfte) {
         this.dsolfte = dsolfte;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (iddsolfte != null ? iddsolfte.hashCode() : 0);
-        return hash;
-    }
+    }    
 
     @Override
     public boolean equals(Object object) {        
@@ -89,11 +66,6 @@ public class Relsolfte implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.sgi.pojos.Relsolfte[ iddsolfte=" + iddsolfte + " ]";
     }
 
 }

@@ -2,7 +2,6 @@ package com.sgi.managed.beans;
 
 import com.sgi.pojos.Catfte2015;
 import com.sgi.pojos.Dsolfte;
-import com.sgi.pojos.Psolicitud;
 import com.sgi.pojos.Relsolfte;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class FuentesInversion implements Serializable {
 
     private List<Relsolfte> fuentesFederalesSelected;
     private List<Relsolfte> fuentesEstatalesSelected;
+    private List<Relsolfte> fuentesSelected;
     private List<Catfte2015> fuentesFederales;
     private List<Catfte2015> fuentesEstatales;
     private Relsolfte relFteFed;
@@ -44,34 +44,43 @@ public class FuentesInversion implements Serializable {
         fuentesEstatalesSelected = new ArrayList<>();
         fuentesFederalesSelected = new ArrayList<>();
         relFteFed = new Relsolfte();
-        relFteFed.setDsolfte(new Dsolfte());
-        relFteFed.setIdSol(new Psolicitud());
+        relFteFed.setDsolfte(new Dsolfte());        
         relFteFed.setIdFte(new Catfte2015());
 
         relFteFedVacia = new Relsolfte();
-        relFteFedVacia.setDsolfte(new Dsolfte());
-        relFteFedVacia.setIdSol(new Psolicitud());
+        relFteFedVacia.setDsolfte(new Dsolfte());        
         relFteFedVacia.setIdFte(new Catfte2015());
 
         relFteFedSelected = new Relsolfte();
-        relFteFedSelected.setDsolfte(new Dsolfte());
-        relFteFedSelected.setIdSol(new Psolicitud());
+        relFteFedSelected.setDsolfte(new Dsolfte());        
         relFteFedSelected.setIdFte(new Catfte2015());
 
         relFteEst = new Relsolfte();
-        relFteEst.setDsolfte(new Dsolfte());
-        relFteEst.setIdSol(new Psolicitud());
+        relFteEst.setDsolfte(new Dsolfte());        
         relFteEst.setIdFte(new Catfte2015());
 
         relFteEstVacia = new Relsolfte();
-        relFteEstVacia.setDsolfte(new Dsolfte());
-        relFteEstVacia.setIdSol(new Psolicitud());
+        relFteEstVacia.setDsolfte(new Dsolfte());        
         relFteEstVacia.setIdFte(new Catfte2015());
 
         relFteEstSelected = new Relsolfte();
-        relFteEstSelected.setDsolfte(new Dsolfte());
-        relFteEstSelected.setIdSol(new Psolicitud());
+        relFteEstSelected.setDsolfte(new Dsolfte());        
         relFteEstSelected.setIdFte(new Catfte2015());
+    }
+
+    public List<Relsolfte> getFuentesSelected() {        
+        fuentesSelected = new ArrayList<>();        
+        for (Relsolfte fuentesFederalesSelected1 : fuentesFederalesSelected) {
+            fuentesSelected.add(fuentesFederalesSelected1);
+        }
+        for (Relsolfte fuentesEstatalesSelected1 : fuentesEstatalesSelected) {
+            fuentesSelected.add(fuentesEstatalesSelected1);
+        }
+        return fuentesSelected;
+    }
+
+    public void setFuentesSelected(List<Relsolfte> fuentesSelected) {
+        this.fuentesSelected = fuentesSelected;
     }
 
     public double getMontoFinalInversion() {
@@ -205,8 +214,7 @@ public class FuentesInversion implements Serializable {
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fuente agregada", relFteFed.getIdFte().getDscFte()));
 
         relFteFed = new Relsolfte();
-        relFteFed.setDsolfte(new Dsolfte());
-        relFteFed.setIdSol(new Psolicitud());
+        relFteFed.setDsolfte(new Dsolfte());        
         relFteFed.setIdFte(new Catfte2015());
 
         RequestContext reqContext = RequestContext.getCurrentInstance();
@@ -232,8 +240,7 @@ public class FuentesInversion implements Serializable {
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fuente agregada", relFteEst.getIdFte().getDscFte()));
 
         relFteEst = new Relsolfte();
-        relFteEst.setDsolfte(new Dsolfte());
-        relFteEst.setIdSol(new Psolicitud());
+        relFteEst.setDsolfte(new Dsolfte());        
         relFteEst.setIdFte(new Catfte2015());
 
         RequestContext reqContext = RequestContext.getCurrentInstance();
@@ -266,4 +273,5 @@ public class FuentesInversion implements Serializable {
         
         montoInversion = montoTotal;
     }
+          
 }

@@ -2,7 +2,9 @@ package com.sgi.pojos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -86,7 +89,7 @@ public class Catacuerdo implements Serializable {
     private BigDecimal avaFis;
 
     @Column(name = "Terminado")
-    private Boolean terminado;
+    private Boolean terminado;    
 
     @Lob
     @Size(max = 65535)
@@ -95,12 +98,23 @@ public class Catacuerdo implements Serializable {
 
     @Column(name = "IdSgi")
     private Short idSgi;
+    
+    @ManyToMany(cascade = {CascadeType.ALL},mappedBy = "acuerdos")
+    private List<Psolicitud> solicitudes = new ArrayList();
 
     public Catacuerdo() {
     }
 
     public Catacuerdo(Integer idAcu) {
         this.idAcu = idAcu;
+    }
+
+    public List<Psolicitud> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(List<Psolicitud> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 
     public Integer getIdAcu() {

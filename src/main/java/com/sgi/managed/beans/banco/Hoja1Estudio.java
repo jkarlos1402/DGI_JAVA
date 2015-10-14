@@ -1,5 +1,8 @@
-package com.sgi.managed.beans;
+package com.sgi.managed.beans.banco;
 
+import com.sgi.dao.CatedosolDAO;
+import com.sgi.dao.PsolicitudDAO;
+import com.sgi.managed.beans.FuentesInversion;
 import com.sgi.pojos.Catacuerdo;
 import com.sgi.pojos.Catbeneficiario;
 import com.sgi.pojos.Catejercicio;
@@ -9,8 +12,11 @@ import com.sgi.pojos.Catsector;
 import com.sgi.pojos.Catue;
 import com.sgi.pojos.Cmodeje;
 import com.sgi.pojos.Ctipobr;
+import com.sgi.pojos.Psolicitud;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -48,39 +54,50 @@ public class Hoja1Estudio implements Serializable {
     private double cantidadMetas;
     private List<Catbeneficiario> catalogoBeneficiarios;
     private Catbeneficiario beneficiarioSelected;
-    private double cantidadBeneficiarios;
-    private int anhosObr;    
-    private int mesesObr;   
-    
+    private int cantidadBeneficiarios;
+    private int anhosObr;
+    private int mesesObr;
+
+    private Psolicitud solicitud = new Psolicitud();
+
     @ManagedProperty("#{fuentesInversion}")
-    FuentesInversion fuentesInversion;
-    
+    private FuentesInversion fuentesInversion;
+
+    @ManagedProperty("#{factibilidadesLegales}")
+    private FactibilidadesLegales factibilidadesLegales;
+
+    @ManagedProperty("#{factibilidadesAmbientales}")
+    private FactibilidadesAmbientales factibilidadesAmbientales;
+
+    @ManagedProperty("#{factibilidadesTecnicas}")
+    private FactibilidadesTecnicas factibilidadesTecnicas;
+
     //para control UI
     private boolean skip;
     private DualListModel<Catacuerdo> accionesFederales;
-    private DualListModel<Catacuerdo> accionesEstatales;
+    private DualListModel<Catacuerdo> accionesEstatales;    
 
     public Hoja1Estudio() {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        catalogoEjericios = (List<Catejercicio>)servletContext.getAttribute("catalogo_ejercicio");
-        
-        List<Catacuerdo> acuerdosFederales = (List<Catacuerdo>)servletContext.getAttribute("catalogo_acuerdos_federales");
-        List<Catacuerdo> acuerdosFederalesSelected = new ArrayList<>();        
+        catalogoEjericios = (List<Catejercicio>) servletContext.getAttribute("catalogo_ejercicio");
+
+        List<Catacuerdo> acuerdosFederales = (List<Catacuerdo>) servletContext.getAttribute("catalogo_acuerdos_federales");
+        List<Catacuerdo> acuerdosFederalesSelected = new ArrayList<>();
         accionesFederales = new DualListModel<>(acuerdosFederales, acuerdosFederalesSelected);
-        
-        List<Catacuerdo> acuerdosEstatales = (List<Catacuerdo>)servletContext.getAttribute("catalogo_acuerdos_estatales");
-        List<Catacuerdo> acuerdosEstatalesSelected = new ArrayList<>();        
+
+        List<Catacuerdo> acuerdosEstatales = (List<Catacuerdo>) servletContext.getAttribute("catalogo_acuerdos_estatales");
+        List<Catacuerdo> acuerdosEstatalesSelected = new ArrayList<>();
         accionesEstatales = new DualListModel<>(acuerdosEstatales, acuerdosEstatalesSelected);
-        
-        catalogoModEje = (List<Cmodeje>)servletContext.getAttribute("catalogo_modo_ejecucion");
-        
-        catalogoTipoObr = (List<Ctipobr>)servletContext.getAttribute("catalogo_tipo_obra");
-        
-        catalogoGruposSoc = (List<Catgposoc>)servletContext.getAttribute("catalogo_grupos_sociales");
-        
-        catalogoMetas = (List<Catmeta>)servletContext.getAttribute("catalogo_metas");
-        
-        catalogoBeneficiarios = (List<Catbeneficiario>)servletContext.getAttribute("catalogo_beneficiarios");
+
+        catalogoModEje = (List<Cmodeje>) servletContext.getAttribute("catalogo_modo_ejecucion");
+
+        catalogoTipoObr = (List<Ctipobr>) servletContext.getAttribute("catalogo_tipo_obra");
+
+        catalogoGruposSoc = (List<Catgposoc>) servletContext.getAttribute("catalogo_grupos_sociales");
+
+        catalogoMetas = (List<Catmeta>) servletContext.getAttribute("catalogo_metas");
+
+        catalogoBeneficiarios = (List<Catbeneficiario>) servletContext.getAttribute("catalogo_beneficiarios");
     }
 
     public int getAnhosObr() {
@@ -115,11 +132,11 @@ public class Hoja1Estudio implements Serializable {
         this.beneficiarioSelected = beneficiarioSelected;
     }
 
-    public double getCantidadBeneficiarios() {
+    public int getCantidadBeneficiarios() {
         return cantidadBeneficiarios;
     }
 
-    public void setCantidadBeneficiarios(double cantidadBeneficiarios) {
+    public void setCantidadBeneficiarios(int cantidadBeneficiarios) {
         this.cantidadBeneficiarios = cantidadBeneficiarios;
     }
 
@@ -291,6 +308,46 @@ public class Hoja1Estudio implements Serializable {
         this.skip = skip;
     }
 
+    public Psolicitud getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(Psolicitud solicitud) {
+        this.solicitud = solicitud;
+    }
+
+    public FuentesInversion getFuentesInversion() {
+        return fuentesInversion;
+    }
+
+    public void setFuentesInversion(FuentesInversion fuentesInversion) {
+        this.fuentesInversion = fuentesInversion;
+    }
+
+    public FactibilidadesLegales getFactibilidadesLegales() {
+        return factibilidadesLegales;
+    }
+
+    public void setFactibilidadesLegales(FactibilidadesLegales factibilidadesLegales) {
+        this.factibilidadesLegales = factibilidadesLegales;
+    }
+
+    public FactibilidadesAmbientales getFactibilidadesAmbientales() {
+        return factibilidadesAmbientales;
+    }
+
+    public void setFactibilidadesAmbientales(FactibilidadesAmbientales factibilidadesAmbientales) {
+        this.factibilidadesAmbientales = factibilidadesAmbientales;
+    }
+
+    public FactibilidadesTecnicas getFactibilidadesTecnicas() {
+        return factibilidadesTecnicas;
+    }
+
+    public void setFactibilidadesTecnicas(FactibilidadesTecnicas factibilidadesTecnicas) {
+        this.factibilidadesTecnicas = factibilidadesTecnicas;
+    }
+
     public String onFlowProcess(FlowEvent event) {
         if (skip) {
             skip = false;   //reset in case user goes back
@@ -299,24 +356,65 @@ public class Hoja1Estudio implements Serializable {
             return event.getNewStep();
         }
     }
-    
+
     public void onSelect(SelectEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento seleccionado", event.getObject().toString()));        
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento seleccionado", event.getObject().toString()));
     }
-    
-    public void onTransfer(TransferEvent event){
+
+    public void onTransfer(TransferEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento(s) transferido(s)", event.getItems().size()+""));        
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento(s) transferido(s)", event.getItems().size() + ""));
     }
-     
+
     public void onUnselect(UnselectEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
     }
-    
-    public void saveHoja1Bco(){
+
+    public void saveHoja1Bco() {
+        CatedosolDAO catedosolDAO = new CatedosolDAO();
+
+        solicitud.setCanBen(cantidadBeneficiarios);
+        solicitud.setCanMet(new BigDecimal(cantidadMetas));
+        solicitud.setDurAgs(new Short(anhosObr + ""));
+        solicitud.setDurMes(new Short(mesesObr + ""));
+        solicitud.setEjercicio(ejercicioSelected);
+        solicitud.setFactAmb(factibilidadesAmbientales.getFactibilidadesAmbientalesToJSON());
+        solicitud.setFactLeg(factibilidadesLegales.getFactibilidadesLegalesToJSON());
+        solicitud.setFactTec(factibilidadesTecnicas.getFactibilidadesTecnicasToJSON());
+        solicitud.setFecCap(new Date());
+        solicitud.setFecMod(new Date());
+        solicitud.setFteMun(fuentesInversion.getNombreFteMun());
+        solicitud.setIdBen(beneficiarioSelected);
+        solicitud.setIdEdoSol(catedosolDAO.getEdoSol(CatedosolDAO.EDO_CREADO));
+        solicitud.setIdGpo(grupoSocSelected);
+        solicitud.setIdMet(metaSelected);
+        solicitud.setIdModEje(modoSelected);
+        solicitud.setIdTipObr(tipoObraSelected);
+        solicitud.setJustifi(justificacion);
+        solicitud.setMonMun(new BigDecimal(fuentesInversion.getMontoFteMun()));
+        solicitud.setMonto(new BigDecimal(fuentesInversion.getMontoFinalInversion()));
+        solicitud.setNomObr(nombreObra);
+        solicitud.setPriCar(principalesCaract);
+        solicitud.setVidaPry(vidaUtil);
+        //solicitud.setRelsolfteList(fuentesInversion.getFuentesSelected());  
+        solicitud.setAcuerdos(new ArrayList<Catacuerdo>());
+        for (Catacuerdo acuerdo : accionesEstatales.getTarget()) {
+            solicitud.addAcuerdo(acuerdo);
+        }
+        for (Catacuerdo acuerdo : accionesFederales.getTarget()) {
+            solicitud.addAcuerdo(acuerdo);
+        }        
+        PsolicitudDAO psolicitudDAO = new PsolicitudDAO();
+
+        boolean correcto = psolicitudDAO.savePsolicitud(solicitud);
+
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion guardada", ""));
+        if (correcto) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informaci\u00f3n guardada", ""));
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Ocurri\u00f3 un error", ""));
+        }
     }
 }

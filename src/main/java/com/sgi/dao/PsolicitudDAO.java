@@ -22,6 +22,7 @@ public class PsolicitudDAO {
             if(session.getTransaction().isActive()){
                 session.getTransaction().rollback();
             }
+            session.close();
             return false;
         }
         session.close();

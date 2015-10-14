@@ -2,6 +2,7 @@ package com.sgi.pojos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -11,10 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,304 +25,322 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "psolicitud")
 public class Psolicitud implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdSol")
     private Integer idSol;
-   
+
     @Column(name = "EvaSoc")
     private Short evaSoc;
-    
+
     @Column(name = "ObjEstSoc")
     private Short objEstSoc;
-    
+
     @Column(name = "ObjPryEje")
     private Short objPryEje;
-    
+
     @Column(name = "ObjDerVia")
     private Short objDerVia;
-    
+
     @Column(name = "ObjMIA")
     private Short objMIA;
-    
+
     @Column(name = "ObjObr")
     private Short objObr;
-    
+
     @Column(name = "ObjAcc")
     private Short objAcc;
-    
+
     @Column(name = "ObjOtr")
     private Short objOtr;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "ObjOtrObs")
     private String objOtrObs;
-    
+
     @Column(name = "IdObr")
     private Integer idObr;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "NomObr")
-    private String nomObr;    
-    
+    private String nomObr;
+
     @Column(name = "Monto")
     private BigDecimal monto;
-    
+
     @Column(name = "MonMun")
     private BigDecimal monMun;
-    
+
     @Size(max = 40)
     @Column(name = "FteMun")
     private String fteMun;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "PriCar")
     private String priCar;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "NomLoc")
     private String nomLoc;
-   
+
     @Column(name = "CooGeo")
     private Short cooGeo;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "ObsCoo")
     private String obsCoo;
-    
+
     @Column(name = "LatIni")
     private BigDecimal latIni;
-    
+
     @Column(name = "LonIni")
     private BigDecimal lonIni;
-    
+
     @Column(name = "LatFin")
     private BigDecimal latFin;
-    
+
     @Column(name = "LonFin")
     private BigDecimal lonFin;
-   
+
     @Lob
     @Size(max = 65535)
     @Column(name = "Imagen")
     private String imagen;
-    
+
     @Column(name = "Ene")
     private BigDecimal ene;
-    
+
     @Column(name = "Feb")
     private BigDecimal feb;
-    
+
     @Column(name = "Mar")
     private BigDecimal mar;
-    
+
     @Column(name = "Abr")
     private BigDecimal abr;
-    
+
     @Column(name = "May")
     private BigDecimal may;
-    
+
     @Column(name = "Jun")
     private BigDecimal jun;
-    
+
     @Column(name = "Jul")
     private BigDecimal jul;
-    
+
     @Column(name = "Ago")
     private BigDecimal ago;
-    
+
     @Column(name = "Sep")
     private BigDecimal sep;
-    
+
     @Column(name = "Oct")
     private BigDecimal oct;
-    
+
     @Column(name = "Nov")
     private BigDecimal nov;
-    
+
     @Column(name = "Dic")
     private BigDecimal dic;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "ObsUE")
     private String obsUE;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "ObsDgi")
     private String obsDgi;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "CriSoc")
     private String criSoc;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "DepNor")
     private String depNor;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "Justifi")
     private String justifi;
-   
+
     @Column(name = "DurAgs")
     private Short durAgs;
-    
+
     @Column(name = "DurMes")
     private Short durMes;
-    
+
     @Column(name = "FecCap")
     @Temporal(TemporalType.DATE)
     private Date fecCap;
-    
+
     @Column(name = "IdUsu")
     private Short idUsu;
-    
+
     @Column(name = "FecVig")
     @Temporal(TemporalType.DATE)
     private Date fecVig;
-    
+
     @Column(name = "EstSoc")
     private Boolean estSoc;
-    
+
     @Column(name = "PryEje")
     private Boolean pryEje;
-    
+
     @Column(name = "LibTer")
     private Boolean libTer;
-    
+
     @Column(name = "DocProp")
     private Boolean docProp;
-    
+
     @Lob
     @Size(max = 16777215)
     @Column(name = "FactLeg")
     private String factLeg;
-    
+
     @Lob
     @Size(max = 16777215)
     @Column(name = "FactAmb")
     private String factAmb;
-    
+
     @Lob
     @Size(max = 16777215)
     @Column(name = "FactTec")
     private String factTec;
-    
+
     @Column(name = "PryImObr")
     private Boolean pryImObr;
-    
+
     @Column(name = "TerRef")
     private Boolean terRef;
-    
+
     @Column(name = "DerVia")
     private Boolean derVia;
-    
+
     @Column(name = "MecSue")
     private Boolean mecSue;
-    
+
     @Column(name = "TotalPre")
     private BigDecimal totalPre;
-    
+
     @Column(name = "CanMet")
     private BigDecimal canMet;
-    
+
     @Column(name = "CanBen")
     private Integer canBen;
-    
+
     @Column(name = "FecMod")
     @Temporal(TemporalType.DATE)
     private Date fecMod;
-    
+
     @Column(name = "FecEnv")
     @Temporal(TemporalType.DATE)
     private Date fecEnv;
-    
+
     @Column(name = "FecIng")
     @Temporal(TemporalType.DATE)
     private Date fecIng;
-    
+
     @Column(name = "FecEval")
     @Temporal(TemporalType.DATE)
     private Date fecEval;
-    
+
     @Column(name = "idTurExp")
     private Integer idTurExp;
-    
+
     @Column(name = "vidaPry")
     private Integer vidaPry;
-    
+
     @JoinColumn(name = "IdSolPre", referencedColumnName = "IdSolPre")
     @ManyToOne
     private Catsolpre idSolPre;
-    
+
     @JoinColumn(name = "Ejercicio", referencedColumnName = "Ejercicio")
     @ManyToOne
     private Catejercicio ejercicio;
-    
+
     @JoinColumn(name = "IdEdoSol", referencedColumnName = "IdEdoSol")
     @ManyToOne
     private Catedosol idEdoSol;
-    
+
     @JoinColumn(name = "idTipLoc", referencedColumnName = "idTipLoc")
     @ManyToOne
     private Ctiploc idTipLoc;
-    
+
     @JoinColumn(name = "IdBen", referencedColumnName = "IdBen")
     @ManyToOne
     private Catbeneficiario idBen;
-    
+
     @JoinColumn(name = "IdMet", referencedColumnName = "IdMet")
     @ManyToOne
     private Catmeta idMet;
-    
+
     @JoinColumn(name = "IdUE", referencedColumnName = "IdUE")
     @ManyToOne
     private Catue idUE;
-    
+
     @JoinColumn(name = "IdGpo", referencedColumnName = "IdGpo")
     @ManyToOne
     private Catgposoc idGpo;
-    
+
     @JoinColumn(name = "IdSec", referencedColumnName = "IdSec")
     @ManyToOne
     private Catsector idSec;
-    
+
     @JoinColumn(name = "IdModEje", referencedColumnName = "idModEje")
     @ManyToOne
     private Cmodeje idModEje;
-    
+
     @JoinColumn(name = "IdTipObr", referencedColumnName = "idTipObr")
     @ManyToOne
     private Ctipobr idTipObr;
-    
+
     @JoinColumn(name = "IdCob", referencedColumnName = "IdCob")
     @ManyToOne
     private Catcobertura idCob;
-    
+
     @JoinColumn(name = "IdTipEva", referencedColumnName = "IdTipEva")
     @ManyToOne
     private Cattipeva idTipEva;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSol")
     private List<Relsolfte> relsolfteList;
+
+    @ManyToMany(cascade = {CascadeType.REFRESH})
+    @JoinTable(name = "relacusol", joinColumns = {
+        @JoinColumn(name = "IdSol")}, inverseJoinColumns = {
+        @JoinColumn(name = "IdAcu")})
+    private List<Catacuerdo> acuerdos = new ArrayList();
 
     public Psolicitud() {
     }
 
     public Psolicitud(Integer idSol) {
         this.idSol = idSol;
+    }
+
+    public List<Catacuerdo> getAcuerdos() {
+        return acuerdos;
+    }
+
+    public void setAcuerdos(List<Catacuerdo> acuerdos) {
+        this.acuerdos = acuerdos;
+    }
+
+    public void addAcuerdo(Catacuerdo acuerdo) {
+        acuerdos.add(acuerdo);
     }
 
     public Integer getIdSol() {
@@ -963,7 +982,14 @@ public class Psolicitud implements Serializable {
     public void setRelsolfteList(List<Relsolfte> relsolfteList) {
         this.relsolfteList = relsolfteList;
     }
-    
+
+    public void addRelsolfte(Relsolfte relsolfte) {
+        if (relsolfteList == null) {
+            relsolfteList = new ArrayList<Relsolfte>();
+        }
+        relsolfteList.add(relsolfte);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -987,6 +1013,6 @@ public class Psolicitud implements Serializable {
     @Override
     public String toString() {
         return "com.sgi.pojos.Psolicitud[ idSol=" + idSol + " ]";
-    }    
-    
+    }
+
 }
