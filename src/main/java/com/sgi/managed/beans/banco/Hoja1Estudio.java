@@ -75,7 +75,7 @@ public class Hoja1Estudio implements Serializable {
     //para control UI
     private boolean skip;
     private DualListModel<Catacuerdo> accionesFederales;
-    private DualListModel<Catacuerdo> accionesEstatales;    
+    private DualListModel<Catacuerdo> accionesEstatales;
 
     public Hoja1Estudio() {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -398,21 +398,21 @@ public class Hoja1Estudio implements Serializable {
         solicitud.setNomObr(nombreObra);
         solicitud.setPriCar(principalesCaract);
         solicitud.setVidaPry(vidaUtil);
-        //solicitud.setRelsolfteList(fuentesInversion.getFuentesSelected());  
+        solicitud.setRelsolfteList(fuentesInversion.getFuentesSelected());
         solicitud.setAcuerdos(new ArrayList<Catacuerdo>());
         for (Catacuerdo acuerdo : accionesEstatales.getTarget()) {
             solicitud.addAcuerdo(acuerdo);
         }
         for (Catacuerdo acuerdo : accionesFederales.getTarget()) {
             solicitud.addAcuerdo(acuerdo);
-        }        
+        }
         PsolicitudDAO psolicitudDAO = new PsolicitudDAO();
 
-        boolean correcto = psolicitudDAO.savePsolicitud(solicitud);
+        Integer noSolicitud = psolicitudDAO.savePsolicitud(solicitud);
 
         FacesContext context = FacesContext.getCurrentInstance();
-        if (correcto) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informaci\u00f3n guardada", ""));
+        if (noSolicitud != -1) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informaci\u00f3n guardada", "No. de solicitud: " + noSolicitud));
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Ocurri\u00f3 un error", ""));
         }

@@ -1,20 +1,31 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "relsolfte")
 public class Relsolfte implements Serializable {
 
-    private static final long serialVersionUID = 1L;    
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idrelsolfte")
+    private Integer idrelsolfte;
+
+    @JoinColumn(name = "iddsolfte")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private Dsolfte dsolfte;
 
     @JoinColumn(name = "idSol", referencedColumnName = "IdSol")
     @ManyToOne(optional = false)
@@ -23,14 +34,17 @@ public class Relsolfte implements Serializable {
     @JoinColumn(name = "idFte", referencedColumnName = "idFte")
     @ManyToOne(optional = false)
     private Catfte2015 idFte;
-    
-    @Id
-    @JoinColumn(name = "iddsolfte")
-    @OneToOne(optional = false)
-    private Dsolfte dsolfte;   
 
-    public Relsolfte() {        
-    }   
+    public Relsolfte() {
+    }
+
+    public Integer getIdrelsolfte() {
+        return idrelsolfte;
+    }
+
+    public void setIdrelsolfte(Integer idrelsolfte) {
+        this.idrelsolfte = idrelsolfte;
+    }
 
     public Psolicitud getIdSol() {
         return idSol;
@@ -54,10 +68,10 @@ public class Relsolfte implements Serializable {
 
     public void setDsolfte(Dsolfte dsolfte) {
         this.dsolfte = dsolfte;
-    }    
+    }
 
     @Override
-    public boolean equals(Object object) {        
+    public boolean equals(Object object) {
         if (!(object instanceof Relsolfte)) {
             return false;
         }

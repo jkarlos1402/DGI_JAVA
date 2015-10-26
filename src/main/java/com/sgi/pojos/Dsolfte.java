@@ -1,76 +1,68 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sgi.pojos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author intel core i 7
- */
 @Entity
 @Table(name = "dsolfte")
-@NamedQueries({
-    @NamedQuery(name = "Dsolfte.findAll", query = "SELECT d FROM Dsolfte d")})
 public class Dsolfte implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "iddsolfte")
     private Integer iddsolfte;
-    @Basic(optional = false)
-    @NotNull
+        
     @Column(name = "tipoFte")
     private short tipoFte;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
+    
     @Column(name = "monto")
     private BigDecimal monto;
+    
     @Column(name = "MontoAutorizado")
     private BigDecimal montoAutorizado;
+    
     @Column(name = "MontoEjercido")
     private BigDecimal montoEjercido;
-    @Basic(optional = false)
-    @NotNull
+        
     @Column(name = "pjeInv")
     private BigDecimal pjeInv;
+    
     @Column(name = "disponible")
     private BigDecimal disponible;
+    
     @Size(max = 40)
-    @Column(name = "cuenta")
+    @Column(name = "cuenta")    
     private String cuenta;
+    
     @Column(name = "sumaAnticipo")
     private BigDecimal sumaAnticipo;
+    
     @Column(name = "retenciones")
     private BigDecimal retenciones;
+    
     @Column(name = "comprobado")
     private BigDecimal comprobado;
+    
     @Column(name = "pagado")
     private BigDecimal pagado;
+    
     @Column(name = "MontoAmpliado")
     private BigDecimal montoAmpliado;
+    
     @Size(max = 45)
     @Column(name = "estPrg")
     private String estPrg;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "dsolfte")
     private Relsolfte relsolfte;
 

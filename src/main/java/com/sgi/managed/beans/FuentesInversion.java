@@ -4,6 +4,7 @@ import com.sgi.pojos.Catfte2015;
 import com.sgi.pojos.Dsolfte;
 import com.sgi.pojos.Relsolfte;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -13,8 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
-
-
 
 @ManagedBean(name = "fuentesInversion")
 @ViewScoped
@@ -33,10 +32,10 @@ public class FuentesInversion implements Serializable {
     private Relsolfte relFteEstVacia;
     private double montoInversion;
     private double montoFinalInversion;
-    
+
     private String nombreFteMun;
     private double montoFteMun;
-    
+
     public FuentesInversion() {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         fuentesFederales = (List<Catfte2015>) servletContext.getAttribute("catalogo_fuentes_federales");
@@ -44,32 +43,32 @@ public class FuentesInversion implements Serializable {
         fuentesEstatalesSelected = new ArrayList<>();
         fuentesFederalesSelected = new ArrayList<>();
         relFteFed = new Relsolfte();
-        relFteFed.setDsolfte(new Dsolfte());        
+        relFteFed.setDsolfte(new Dsolfte());
         relFteFed.setIdFte(new Catfte2015());
 
         relFteFedVacia = new Relsolfte();
-        relFteFedVacia.setDsolfte(new Dsolfte());        
+        relFteFedVacia.setDsolfte(new Dsolfte());
         relFteFedVacia.setIdFte(new Catfte2015());
 
         relFteFedSelected = new Relsolfte();
-        relFteFedSelected.setDsolfte(new Dsolfte());        
+        relFteFedSelected.setDsolfte(new Dsolfte());
         relFteFedSelected.setIdFte(new Catfte2015());
 
         relFteEst = new Relsolfte();
-        relFteEst.setDsolfte(new Dsolfte());        
+        relFteEst.setDsolfte(new Dsolfte());
         relFteEst.setIdFte(new Catfte2015());
 
         relFteEstVacia = new Relsolfte();
-        relFteEstVacia.setDsolfte(new Dsolfte());        
+        relFteEstVacia.setDsolfte(new Dsolfte());
         relFteEstVacia.setIdFte(new Catfte2015());
 
         relFteEstSelected = new Relsolfte();
-        relFteEstSelected.setDsolfte(new Dsolfte());        
+        relFteEstSelected.setDsolfte(new Dsolfte());
         relFteEstSelected.setIdFte(new Catfte2015());
     }
 
-    public List<Relsolfte> getFuentesSelected() {        
-        fuentesSelected = new ArrayList<>();        
+    public List<Relsolfte> getFuentesSelected() {
+        fuentesSelected = new ArrayList<>();
         for (Relsolfte fuentesFederalesSelected1 : fuentesFederalesSelected) {
             fuentesSelected.add(fuentesFederalesSelected1);
         }
@@ -214,7 +213,7 @@ public class FuentesInversion implements Serializable {
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fuente agregada", relFteFed.getIdFte().getDscFte()));
 
         relFteFed = new Relsolfte();
-        relFteFed.setDsolfte(new Dsolfte());        
+        relFteFed.setDsolfte(new Dsolfte());
         relFteFed.setIdFte(new Catfte2015());
 
         RequestContext reqContext = RequestContext.getCurrentInstance();
@@ -240,7 +239,7 @@ public class FuentesInversion implements Serializable {
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fuente agregada", relFteEst.getIdFte().getDscFte()));
 
         relFteEst = new Relsolfte();
-        relFteEst.setDsolfte(new Dsolfte());        
+        relFteEst.setDsolfte(new Dsolfte());
         relFteEst.setIdFte(new Catfte2015());
 
         RequestContext reqContext = RequestContext.getCurrentInstance();
@@ -251,7 +250,7 @@ public class FuentesInversion implements Serializable {
     public void deleteRelFteEst() {
         fuentesEstatalesSelected.remove(relFteEstSelected);
         obtieneTotalDeInversion();
-        
+
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fuente eliminada", relFteEstSelected.getIdFte().getDscFte()));
 
@@ -259,7 +258,7 @@ public class FuentesInversion implements Serializable {
     }
 
     public void obtieneTotalDeInversion() {
-        double montoTotal = 0.00;        
+        double montoTotal = 0.00;
         for (Relsolfte fuentesFederalesSelected1 : fuentesFederalesSelected) {
             montoTotal += fuentesFederalesSelected1.getDsolfte().getMonto().doubleValue();
         }
@@ -268,10 +267,21 @@ public class FuentesInversion implements Serializable {
             montoTotal += fuentesEstatalesSelected1.getDsolfte().getMonto().doubleValue();
         }
         montoFinalInversion = montoTotal;
-        
+
         montoTotal += montoFteMun;
-        
+
         montoInversion = montoTotal;
+
+        for (Relsolfte fuentesFederalesSelected1 : fuentesFederalesSelected) {
+            double pjeInv = (fuentesFederalesSelected1.getDsolfte().getMonto().floatValue() * 100.00d / montoFinalInversion);
+            fuentesFederalesSelected1.getDsolfte().setPjeInv(new BigDecimal(pjeInv));
+        }
+
+        for (Relsolfte fuentesEstatalesSelected1 : fuentesEstatalesSelected) {
+            double pjeInv = (fuentesEstatalesSelected1.getDsolfte().getMonto().floatValue() * 100.00d / montoFinalInversion);
+            fuentesEstatalesSelected1.getDsolfte().setPjeInv(new BigDecimal(pjeInv));
+        }
+
     }
-          
+
 }
