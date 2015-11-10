@@ -151,9 +151,13 @@ public class FactibilidadesLegales implements Serializable {
 
     public String getFactibilidadesLegalesToJSON() {
         Gson gson = new Gson();
-        String jsonObj = gson.toJson(this);
-        System.out.println(jsonObj);
+        String jsonObj = gson.toJson(this);        
         return jsonObj;
     }
-
+    
+    public static FactibilidadesLegales fromJSON(String json){
+        Gson gson = new Gson();
+        FactibilidadesLegales fact = (FactibilidadesLegales)gson.fromJson(json, FactibilidadesLegales.class);        
+        return fact;
+    }
 }

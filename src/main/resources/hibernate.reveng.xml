@@ -43,4 +43,5 @@
   <table-filter match-name="psolicitud"/>
   <table-filter match-name="dsolfte"/>
   <table-filter match-name="relsolfte"/>
+  <table-filter match-name="relsolbco"/>
 </hibernate-reverse-engineering>

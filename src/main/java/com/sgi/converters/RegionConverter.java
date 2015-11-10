@@ -1,6 +1,6 @@
 package com.sgi.converters;
 
-import com.sgi.pojos.Catbeneficiario;
+import com.sgi.pojos.Catregion;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -8,19 +8,19 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.servlet.ServletContext;
 
-@FacesConverter("beneficiariosConverter")
-public class BeneficiariosConverter implements Converter{
+@FacesConverter("regionConverter")
+public class RegionConverter implements Converter{
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {        
         if(value != null && value.trim().length() > 0) {            
             try {
-                Catbeneficiario beneficiarioT = new Catbeneficiario();                
-                beneficiarioT.setIdBen(new Integer(value));
+                Catregion regionT = new Catregion();                
+                regionT.setIdReg(new Integer(value));
                 ServletContext sc = (ServletContext)context.getExternalContext().getContext();
-                List<Catbeneficiario> beneficiarios = (List<Catbeneficiario>)sc.getAttribute("catalogo_beneficiarios");
-                for (Catbeneficiario beneficiario : beneficiarios) {
-                    if(beneficiario.equals(beneficiarioT)){
-                        return beneficiario;
+                List<Catregion> regiones = (List<Catregion>)sc.getAttribute("catalogo_regiones");
+                for (Catregion region : regiones) {
+                    if(region.equals(regionT)){
+                        return region;
                     }
                 }
             } catch(NumberFormatException e) {
@@ -36,9 +36,9 @@ public class BeneficiariosConverter implements Converter{
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            if (value instanceof Catbeneficiario) {
-                Catbeneficiario beneficiario = (Catbeneficiario) value;
-                return beneficiario.getIdBen()+ "";
+            if (value instanceof Catregion) {
+                Catregion region = (Catregion) value;
+                return region.getIdReg()+ "";
             }else{
                 return null;
             }

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Hoja 2 Banco de proyectos</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <p:panel header="Hoja 2" id="panelHoja2Bco">
+                <p:messages id="msgAccionesHoja2Bco" />
+                <p:growl id="mensajesHoja2Bco" showDetail="true" escape="false" />
+                <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
+                    <h:outputLabel value="Tipo de cobertura: " for="coberturaBco"/>                    
+                    <p:selectOneMenu id="coberturaBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob}" required="true" converter="coberturaConverter" label="Cobertura">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItems value="#{hoja2Estudio.catalogoCobertura}" />
+                        <p:ajax event="valueChange" update=":formGrl:panelHoja2Bco" />
+                    </p:selectOneMenu>                                                            
+                </h:panelGrid>                
+                <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px" id="divRegionesBco" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}">
+                    <h:outputText value="Regiones:"/>
+                    <p:pickList id="regionesBco" value="#{hoja2Estudio.regiones}" var="region" itemLabel="#{region}" itemValue="#{region}" converter="regionConverter" >
+                        <f:facet name="sourceCaption">Disponibles</f:facet>
+                        <f:facet name="targetCaption">Seleccionados</f:facet>
+                    </p:pickList>                                                     
+                </h:panelGrid>
+                <f:facet name="footer">
+                    <p:commandButton value="Guardar" id="guardarHoja2Bco" update="msgAccionesHoja2Bco,mensajesHoja2Bco" actionListener="#{hoja2Estudio.saveHoja2Bco}" styleClass="ui-priority-primary" />
+                </f:facet>
+            </p:panel>
+        </ui:composition>        
+    </h:body>
+</html>
+

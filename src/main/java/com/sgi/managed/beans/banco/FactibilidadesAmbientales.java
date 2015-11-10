@@ -168,8 +168,12 @@ public class FactibilidadesAmbientales implements Serializable{
     
     public String getFactibilidadesAmbientalesToJSON() {
         Gson gson = new Gson();
-        String jsonObj = gson.toJson(this);
-        System.out.println(jsonObj);
+        String jsonObj = gson.toJson(this);        
         return jsonObj;
+    }
+    
+    public static FactibilidadesAmbientales fromJSON(String json){
+        Gson gson = new Gson();
+        return (FactibilidadesAmbientales)gson.fromJson(json, FactibilidadesAmbientales.class);
     }
 }

@@ -1,11 +1,16 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -27,12 +32,23 @@ public class Catregion implements Serializable {
     @Size(max = 20)
     @Column(name = "NomReg")
     private String nomReg;
+    
+    @ManyToMany(cascade = {CascadeType.ALL},mappedBy = "regiones")
+    private List<Psolicitud> solicitudes = new ArrayList();
 
     public Catregion() {
     }
 
     public Catregion(Integer idReg) {
         this.idReg = idReg;
+    }
+
+    public List<Psolicitud> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(List<Psolicitud> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 
     public Integer getIdReg() {
@@ -81,7 +97,7 @@ public class Catregion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catregion[ idReg=" + idReg + " ]";
+        return nomReg;
     }
     
 }

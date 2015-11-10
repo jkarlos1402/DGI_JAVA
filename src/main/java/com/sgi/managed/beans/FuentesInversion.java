@@ -5,12 +5,14 @@ import com.sgi.pojos.Dsolfte;
 import com.sgi.pojos.Relsolfte;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.ServletContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
@@ -204,6 +206,10 @@ public class FuentesInversion implements Serializable {
         FacesMessage msg = new FacesMessage("Edici\u00f3n cancelada", ((Relsolfte) event.getObject()).getIdFte().getDscFte());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+    
+    public void changeMonMun(AjaxBehaviorEvent event) {        
+        obtieneTotalDeInversion();
+    }
 
     public void addRelFteFed() {
         fuentesFederalesSelected.add(relFteFed);
@@ -222,9 +228,8 @@ public class FuentesInversion implements Serializable {
     }
 
     public void deleteRelFteFed() {
-        fuentesFederalesSelected.remove(relFteFedSelected);
-        obtieneTotalDeInversion();
-
+        fuentesFederalesSelected.remove(relFteFedSelected);        
+        obtieneTotalDeInversion();        
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fuente eliminada", relFteFedSelected.getIdFte().getDscFte()));
 
@@ -271,15 +276,18 @@ public class FuentesInversion implements Serializable {
         montoTotal += montoFteMun;
 
         montoInversion = montoTotal;
-
+        double montoAut;
+        double pjeInv;
         for (Relsolfte fuentesFederalesSelected1 : fuentesFederalesSelected) {
-            double pjeInv = (fuentesFederalesSelected1.getDsolfte().getMonto().floatValue() * 100.00d / montoFinalInversion);
-            fuentesFederalesSelected1.getDsolfte().setPjeInv(new BigDecimal(pjeInv));
+            montoAut = fuentesFederalesSelected1.getDsolfte().getMontoAutorizado() != null ? fuentesFederalesSelected1.getDsolfte().getMontoAutorizado().doubleValue() : 0.00d;
+            pjeInv = ((fuentesFederalesSelected1.getDsolfte().getMonto().doubleValue() - montoAut) * 100.00d / montoFinalInversion);
+            fuentesFederalesSelected1.getDsolfte().setPjeInv(new BigDecimal(pjeInv).round(new MathContext(5)));
         }
 
         for (Relsolfte fuentesEstatalesSelected1 : fuentesEstatalesSelected) {
-            double pjeInv = (fuentesEstatalesSelected1.getDsolfte().getMonto().floatValue() * 100.00d / montoFinalInversion);
-            fuentesEstatalesSelected1.getDsolfte().setPjeInv(new BigDecimal(pjeInv));
+            montoAut = fuentesEstatalesSelected1.getDsolfte().getMontoAutorizado() != null ? fuentesEstatalesSelected1.getDsolfte().getMontoAutorizado().doubleValue() : 0.00d;
+            pjeInv = ((fuentesEstatalesSelected1.getDsolfte().getMonto().doubleValue() - montoAut) * 100.00d / montoFinalInversion);
+            fuentesEstatalesSelected1.getDsolfte().setPjeInv(new BigDecimal(pjeInv).round(new MathContext(5)));
         }
 
     }

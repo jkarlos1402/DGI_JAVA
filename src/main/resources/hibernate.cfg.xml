@@ -7,8 +7,9 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sgi_test_java?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.show_sql">false</property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <mapping class="com.sgi.pojos.Carea"/>
     <mapping class="com.sgi.pojos.Catclasec"/>
     <mapping class="com.sgi.pojos.Catcobertura"/>
@@ -51,5 +52,6 @@
     <mapping class="com.sgi.pojos.Psolicitud"/>
     <mapping class="com.sgi.pojos.Dsolfte"/>
     <mapping class="com.sgi.pojos.Relsolfte"/>
+    <mapping class="com.sgi.pojos.Relsolbco"/>
   </session-factory>
 </hibernate-configuration>

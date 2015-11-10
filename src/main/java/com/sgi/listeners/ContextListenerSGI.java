@@ -2,10 +2,12 @@ package com.sgi.listeners;
 
 import com.sgi.dao.CatacuerdoDAO;
 import com.sgi.dao.CatbeneficiarioDAO;
+import com.sgi.dao.CatcoberturaDAO;
 import com.sgi.dao.CatejercicioDAO;
 import com.sgi.dao.Catfte2015DAO;
 import com.sgi.dao.CatgposocDAO;
 import com.sgi.dao.CatmetaDAO;
+import com.sgi.dao.CatregionDAO;
 import com.sgi.dao.CmodejeDAO;
 import com.sgi.dao.CtipObrDAO;
 import javax.servlet.ServletContext;
@@ -43,6 +45,12 @@ public class ContextListenerSGI implements ServletContextListener {
         
         CatbeneficiarioDAO catbeneficiarioDAO = new CatbeneficiarioDAO();
         sc.setAttribute("catalogo_beneficiarios", catbeneficiarioDAO.getBeneficiarios());
+        
+        CatcoberturaDAO catcoberturaDAO = new CatcoberturaDAO();
+        sc.setAttribute("catalogo_coberturas", catcoberturaDAO.getCoberturas());
+        
+        CatregionDAO catregionDAO = new CatregionDAO();
+        sc.setAttribute("catalogo_regiones", catregionDAO.getRegiones());
     }
 
     @Override

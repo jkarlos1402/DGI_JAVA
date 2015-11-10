@@ -79,8 +79,12 @@ public class FactibilidadesTecnicas implements Serializable{
     
     public String getFactibilidadesTecnicasToJSON() {
         Gson gson = new Gson();
-        String jsonObj = gson.toJson(this);
-        System.out.println(jsonObj);
+        String jsonObj = gson.toJson(this);        
         return jsonObj;
+    }
+    
+    public static FactibilidadesTecnicas fromJSON(String json){
+        Gson gson = new Gson();
+        return (FactibilidadesTecnicas)gson.fromJson(json, FactibilidadesTecnicas.class);
     }
 }

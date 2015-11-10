@@ -26,7 +26,7 @@ public class GruposSocialesConverter implements Converter{
                     }
                 }
             } catch (NumberFormatException e) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Grupo social", "Seleccione una opci\u00f3n"));
+                return null;
             }
             return null;
         } else {

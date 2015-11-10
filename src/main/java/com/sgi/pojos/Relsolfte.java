@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Relsolfte implements Serializable {
     private Dsolfte dsolfte;
 
     @JoinColumn(name = "idSol", referencedColumnName = "IdSol")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Psolicitud idSol;
 
     @JoinColumn(name = "idFte", referencedColumnName = "idFte")

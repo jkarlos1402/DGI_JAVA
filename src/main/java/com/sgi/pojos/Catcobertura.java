@@ -82,7 +82,7 @@ public class Catcobertura implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catcobertura[ idCob=" + idCob + " ]";
+        return nomCob;
     }    
 
 }

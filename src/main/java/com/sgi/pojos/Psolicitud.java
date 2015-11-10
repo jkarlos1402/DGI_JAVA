@@ -18,10 +18,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "psolicitud")
@@ -316,20 +319,47 @@ public class Psolicitud implements Serializable {
     @ManyToOne
     private Cattipeva idTipEva;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSol")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "idSol",orphanRemoval = true)    
     private List<Relsolfte> relsolfteList;
 
     @ManyToMany(cascade = {CascadeType.REFRESH})
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "relacusol", joinColumns = {
         @JoinColumn(name = "IdSol")}, inverseJoinColumns = {
         @JoinColumn(name = "IdAcu")})
     private List<Catacuerdo> acuerdos = new ArrayList();
+    
+    @ManyToMany(cascade = {CascadeType.REFRESH})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "relregsol", joinColumns = {
+        @JoinColumn(name = "IdSol")}, inverseJoinColumns = {
+        @JoinColumn(name = "IdReg")})
+    private List<Catregion> regiones = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idSol")
+    private Relsolbco relsolbco;
 
     public Psolicitud() {
     }
 
     public Psolicitud(Integer idSol) {
         this.idSol = idSol;
+    }
+
+    public List<Catregion> getRegiones() {
+        return regiones;
+    }
+
+    public void setRegiones(List<Catregion> regiones) {
+        this.regiones = regiones;
+    }
+
+    public Relsolbco getRelsolbco() {
+        return relsolbco;
+    }
+
+    public void setRelsolbco(Relsolbco relsolbco) {
+        this.relsolbco = relsolbco;
     }
 
     public List<Catacuerdo> getAcuerdos() {
