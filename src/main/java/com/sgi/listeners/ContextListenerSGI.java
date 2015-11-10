@@ -7,6 +7,7 @@ import com.sgi.dao.CatejercicioDAO;
 import com.sgi.dao.Catfte2015DAO;
 import com.sgi.dao.CatgposocDAO;
 import com.sgi.dao.CatmetaDAO;
+import com.sgi.dao.CatmunicipioDAO;
 import com.sgi.dao.CatregionDAO;
 import com.sgi.dao.CmodejeDAO;
 import com.sgi.dao.CtipObrDAO;
@@ -51,6 +52,9 @@ public class ContextListenerSGI implements ServletContextListener {
         
         CatregionDAO catregionDAO = new CatregionDAO();
         sc.setAttribute("catalogo_regiones", catregionDAO.getRegiones());
+        
+        CatmunicipioDAO catmunicipioDAO = new CatmunicipioDAO();
+        sc.setAttribute("catalogo_municipios", catmunicipioDAO.getRegiones());
     }
 
     @Override

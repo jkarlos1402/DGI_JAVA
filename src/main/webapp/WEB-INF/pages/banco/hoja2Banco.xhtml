@@ -21,9 +21,15 @@
                         <p:ajax event="valueChange" update=":formGrl:panelHoja2Bco" />
                     </p:selectOneMenu>                                                            
                 </h:panelGrid>                
-                <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px" id="divRegionesBco" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}">
-                    <h:outputText value="Regiones:"/>
-                    <p:pickList id="regionesBco" value="#{hoja2Estudio.regiones}" var="region" itemLabel="#{region}" itemValue="#{region}" converter="regionConverter" >
+                <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">
+                    <h:outputText value="Regiones:" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}"/>
+                    <p:pickList id="regionesBco" value="#{hoja2Estudio.regiones}" var="region" itemLabel="#{region}" itemValue="#{region}" converter="regionConverter" required="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}" label="Regiones">
+                        <f:facet name="sourceCaption">Disponibles</f:facet>
+                        <f:facet name="targetCaption">Seleccionados</f:facet>
+                    </p:pickList>   
+                    
+                    <h:outputText value="Municipios:" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 ? true:false}"/>
+                    <p:pickList id="municiopiosBco" value="#{hoja2Estudio.municipios}" var="municipio" itemLabel="#{municipio}" itemValue="#{municipio}" converter="municipiosConverter" required="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 ? true:false}" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 ? true:false}" label="Municipios">
                         <f:facet name="sourceCaption">Disponibles</f:facet>
                         <f:facet name="targetCaption">Seleccionados</f:facet>
                     </p:pickList>                                                     

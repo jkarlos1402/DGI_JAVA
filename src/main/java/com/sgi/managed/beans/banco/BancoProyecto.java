@@ -2,7 +2,7 @@ package com.sgi.managed.beans.banco;
 
 import com.sgi.dao.RelsolbcoDAO;
 import com.sgi.pojos.Catacuerdo;
-import com.sgi.pojos.Catejercicio;
+import com.sgi.pojos.Catmunicipio;
 import com.sgi.pojos.Catregion;
 import com.sgi.pojos.Relsolbco;
 import com.sgi.pojos.Relsolfte;
@@ -102,12 +102,27 @@ public class BancoProyecto implements Serializable {
             hoja1.setFactibilidadesLegales(FactibilidadesLegales.fromJSON(bancoProyecto.getIdSol().getFactLeg()));
             hoja1.setFactibilidadesTecnicas(FactibilidadesTecnicas.fromJSON(bancoProyecto.getIdSol().getFactTec()));
 
-            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();            
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             hoja2.getRegiones().getTarget().clear();
-            hoja2.getRegiones().setSource((List<Catregion>) servletContext.getAttribute("catalogo_regiones"));
-            for (Catregion region : bancoProyecto.getIdSol().getRegiones()) {                                
+            List<Catregion> catalogoRegiones = new ArrayList<>();
+            for (Catregion region : (List<Catregion>) servletContext.getAttribute("catalogo_regiones")) {
+                catalogoRegiones.add(region);
+            }
+            hoja2.getRegiones().setSource(catalogoRegiones);
+            for (Catregion region : bancoProyecto.getIdSol().getRegiones()) {
                 hoja2.getRegiones().getTarget().add(region);
                 hoja2.getRegiones().getSource().remove(region);
+            }
+
+            hoja2.getMunicipios().getTarget().clear();
+            List<Catmunicipio> catalogoMunicipios = new ArrayList<>();
+            for (Catmunicipio municipio : (List<Catmunicipio>) servletContext.getAttribute("catalogo_municipios")) {
+                catalogoMunicipios.add(municipio);
+            }
+            hoja2.getMunicipios().setSource(catalogoMunicipios);
+            for (Catmunicipio municipio : bancoProyecto.getIdSol().getMunicipios()) {
+                hoja2.getMunicipios().getTarget().add(municipio);
+                hoja2.getMunicipios().getSource().remove(municipio);
             }
         }
     }

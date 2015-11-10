@@ -1,12 +1,15 @@
 package com.sgi.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -44,12 +47,23 @@ public class Catmunicipio implements Serializable {
     @Size(max = 30)
     @Column(name = "NomFed")
     private String nomFed;
+    
+    @ManyToMany(cascade = {CascadeType.ALL},mappedBy = "municipios")
+    private List<Psolicitud> solicitudes = new ArrayList();
 
     public Catmunicipio() {
     }
 
     public Catmunicipio(Integer idMun) {
         this.idMun = idMun;
+    }
+
+    public List<Psolicitud> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(List<Psolicitud> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 
     public Integer getIdMun() {
@@ -130,7 +144,7 @@ public class Catmunicipio implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Catmunicipio[ idMun=" + idMun + " ]";
+        return nomMun;
     }
 
 }

@@ -335,6 +335,13 @@ public class Psolicitud implements Serializable {
         @JoinColumn(name = "IdSol")}, inverseJoinColumns = {
         @JoinColumn(name = "IdReg")})
     private List<Catregion> regiones = new ArrayList<>();
+    
+    @ManyToMany(cascade = {CascadeType.REFRESH})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "relmunsol", joinColumns = {
+        @JoinColumn(name = "IdSol")}, inverseJoinColumns = {
+        @JoinColumn(name = "IdMun")})
+    private List<Catmunicipio> municipios = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "idSol")
     private Relsolbco relsolbco;
@@ -344,6 +351,14 @@ public class Psolicitud implements Serializable {
 
     public Psolicitud(Integer idSol) {
         this.idSol = idSol;
+    }
+
+    public List<Catmunicipio> getMunicipios() {
+        return municipios;
+    }
+
+    public void setMunicipios(List<Catmunicipio> municipios) {
+        this.municipios = municipios;
     }
 
     public List<Catregion> getRegiones() {
