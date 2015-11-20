@@ -11,16 +11,17 @@
     <h:body>
         <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/estilosGenerales.css" />
         <script type="text/javascript" src="#{request.contextPath}/js/hoja1Bco.js"/>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js"/>
         <h:form id="formBusqueda">          
-            <div class="ui-grid ui-grid-responsive">
-                <div class="ui-grid-row">                    
-                    <div class="ui-grid-col-12">
+            <div styleClass="ui-grid ui-grid-responsive">
+                <div styleClass="ui-grid-row">                    
+                    <div styleClass="ui-grid-col-12">
                         <p:fieldset legend="B&uacute;squeda" style="margin-bottom:20px;">  
                             <p:growl id="msgBusqueda" showDetail="true" escape="false" />
                             <h:panelGrid columns="4" cellpadding="5">                                
                                 <p:outputLabel for="noBcoBusqueda" value="No. Banco de proyectos"/>
                                 <p:inputText id="noBcoBusqueda" value="#{bancoProyectoFind.noBancoFind}" required="true"/>
-                                <p:commandButton value="Buscar" actionListener="#{bancoProyectoFind.getBancoProyecto}" update="msgBusqueda,:formGrl" async="true"/>                                
+                                <p:commandButton value="Buscar" actionListener="#{bancoProyectoFind.getBancoProyecto}" update="msgBusqueda,:formGrl" async="true"/>                                                                
                             </h:panelGrid>
                         </p:fieldset>
                     </div>                    
@@ -28,10 +29,10 @@
             </div>
         </h:form>
         <h:form id="formGrl">            
-            <div class="ui-grid ui-grid-responsive">
-                <div class="ui-grid-row">                    
-                    <div class="ui-grid-col-12">                        
-                        <p:wizard flowListener="#{hoja1Estudio.onFlowProcess}" nextLabel="Siguiente" backLabel="Atras" rendered="true">
+            <div styleClass="ui-grid ui-grid-responsive">
+                <div styleClass="ui-grid-row">                    
+                    <div styleClass="ui-grid-col-12">                        
+                        <p:wizard flowListener="#{bancoProyectoFind.onFlowProcess}" nextLabel="Siguiente" backLabel="Atras" rendered="true">
                             <p:tab id="hoja1Bco" title="Hoja 1">
                                 <ui:include src="WEB-INF/pages/banco/hoja1Banco.xhtml"/>
                             </p:tab>                        

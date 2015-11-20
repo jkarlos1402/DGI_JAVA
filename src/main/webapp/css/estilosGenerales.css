@@ -1,7 +1,12 @@
 body{
     font-size: 12px;
 }
-
+.tablaMapa{
+    width: 100%;
+}
+.tablaMapa .etiqueta{
+    width: 15%;
+}
 .etiqueta{
     text-align: right;
 }

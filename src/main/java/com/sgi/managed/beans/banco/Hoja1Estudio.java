@@ -59,10 +59,7 @@ public class Hoja1Estudio implements Serializable {
     private FactibilidadesTecnicas factibilidadesTecnicas;
     
     @ManagedProperty("#{estudioSocioEconomico}")
-    private Solicitud solicitud;
-
-    //para control UI
-    private boolean skip;
+    private Solicitud solicitud;    
 
     public Hoja1Estudio() {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -189,15 +186,7 @@ public class Hoja1Estudio implements Serializable {
 
     public void setSector(Catsector sector) {
         this.sector = sector;
-    }
-
-    public boolean isSkip() {
-        return skip;
-    }
-
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
+    }    
 
     public FuentesInversion getFuentesInversion() {
         return fuentesInversion;
@@ -237,16 +226,7 @@ public class Hoja1Estudio implements Serializable {
 
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
-    }    
-
-    public String onFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        } else {                            
-            return event.getNewStep();
-        }
-    }
+    }        
 
     public List<Catacuerdo> completeAcuerdoFederal(String query) {
         List<Catacuerdo> filteredAcuerdos = new ArrayList<>();

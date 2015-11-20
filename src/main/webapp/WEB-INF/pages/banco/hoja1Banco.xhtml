@@ -97,7 +97,7 @@
                         <p:column headerText="Monto">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{fuenteFederal.dsolfte.monto}"/></f:facet>
-                                <f:facet name="input"><p:inputText id="modelInput" value="#{fuenteFederal.dsolfte.monto}" style="width:100%" class="cantidadMonetaria"/></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{fuenteFederal.dsolfte.monto}" style="width:100%" styleClass="cantidadMonetaria"/></f:facet>
                             </p:cellEditor>
                         </p:column>
                         <p:column headerText="Fuente">
@@ -115,10 +115,10 @@
                             <p:rowEditor />
                         </p:column>
                         <f:facet name="footer">
-                            <div class="ui-grid ui-grid-responsive">
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-12 footerTable">
-                                        <p:commandButton value="Agregar" type="button" onclick="PF('dialogAddFuenteFed').show();" class=""/>
+                            <div styleClass="ui-grid ui-grid-responsive">
+                                <div styleClass="ui-grid-row">
+                                    <div styleClass="ui-grid-col-12 footerTable">
+                                        <p:commandButton value="Agregar" type="button" onclick="PF('dialogAddFuenteFed').show();"/>
                                     </div>
                                 </div>
                             </div>                                                
@@ -136,8 +136,8 @@
                         <p:ajax event="rowEditCancel" listener="#{hoja1Estudio.fuentesInversion.onRowCancel}" update="fuentesEstatales" />                                            
                         <p:column headerText="Monto">
                             <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{fuenteEstatal.dsolfte.monto}" class="cantidadMonetaria"/></f:facet>
-                                <f:facet name="input"><p:inputText id="modelInput" value="#{fuenteEstatal.dsolfte.monto}" style="width:100%" class="cantidadMonetaria"/></f:facet>
+                                <f:facet name="output"><h:outputText value="#{fuenteEstatal.dsolfte.monto}" styleClass="cantidadMonetaria"/></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{fuenteEstatal.dsolfte.monto}" style="width:100%" styleClass="cantidadMonetaria"/></f:facet>
                             </p:cellEditor>
                         </p:column>
                         <p:column headerText="Fuente">
@@ -155,9 +155,9 @@
                             <p:rowEditor />
                         </p:column>
                         <f:facet name="footer">
-                            <div class="ui-grid ui-grid-responsive">
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-12 footerTable">
+                            <div styleClass="ui-grid ui-grid-responsive">
+                                <div styleClass="ui-grid-row">
+                                    <div styleClass="ui-grid-col-12 footerTable">
                                         <p:commandButton value="Agregar" type="button" onclick="PF('dialogAddFuenteEst').show();" />
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                 </h:panelGrid>
                 <h:panelGrid columns="3" columnClasses="etiqueta,valor,valor" cellpadding="5px">
                     <p:outputLabel value="Municipal:" for="fteMunBco"/>
-                    <p:inputText value="#{hoja1Estudio.fuentesInversion.montoFteMun}" id="fteMunBco" label="Monto de la fuente municipal" class="cantidadMonetaria">
+                    <p:inputText value="#{hoja1Estudio.fuentesInversion.montoFteMun}" id="fteMunBco" label="Monto de la fuente municipal" styleClass="cantidadMonetaria">
                         <p:ajax event="valueChange" listener="#{hoja1Estudio.fuentesInversion.changeMonMun}" update="montoInversion"/>
                     </p:inputText>
                     <p:inputText value="#{hoja1Estudio.fuentesInversion.nombreFteMun}" id="nomFteMunBco" label="Fuente municipal"/>

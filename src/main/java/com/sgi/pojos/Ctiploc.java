@@ -82,7 +82,7 @@ public class Ctiploc implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sgi.pojos.Ctiploc[ idTipLoc=" + idTipLoc + " ]";
+        return nomTipLoc;
     }    
 
 }

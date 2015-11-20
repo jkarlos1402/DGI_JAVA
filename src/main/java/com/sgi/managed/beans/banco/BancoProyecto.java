@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
+import org.primefaces.event.FlowEvent;
 
 @ManagedBean(name = "bancoProyectoFind")
 @ViewScoped
@@ -32,7 +33,18 @@ public class BancoProyecto implements Serializable {
     @ManagedProperty("#{hoja2Estudio}")
     private Hoja2Estudio hoja2;
 
+    //para control UI
+    private boolean skip;
+
     public BancoProyecto() {
+    }
+
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
     }
 
     public Hoja2Estudio getHoja2() {
@@ -127,4 +139,15 @@ public class BancoProyecto implements Serializable {
         }
     }
 
+    public String onFlowProcess(FlowEvent event) {
+        if (event.getNewStep().contentEquals("hoja2Bco")) {
+            hoja2.cambioCoordenadas();
+        }
+        if (skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        } else {
+            return event.getNewStep();
+        }
+    }    
 }

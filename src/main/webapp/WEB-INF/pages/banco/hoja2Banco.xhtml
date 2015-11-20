@@ -27,18 +27,92 @@
                         <f:facet name="sourceCaption">Disponibles</f:facet>
                         <f:facet name="targetCaption">Seleccionados</f:facet>
                     </p:pickList>   
-                    
+
                     <h:outputText value="Municipios:" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 ? true:false}"/>
                     <p:pickList id="municiopiosBco" value="#{hoja2Estudio.municipios}" var="municipio" itemLabel="#{municipio}" itemValue="#{municipio}" converter="municipiosConverter" required="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 ? true:false}" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 ? true:false}" label="Municipios">
                         <f:facet name="sourceCaption">Disponibles</f:facet>
                         <f:facet name="targetCaption">Seleccionados</f:facet>
                     </p:pickList>                                                     
                 </h:panelGrid>
+                <h:panelGrid columns="2" columnClasses="etiqueta,valor" cellpadding="5px">
+                    <p:outputLabel value="Localidad(es): " for="localidadBco" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 || hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}"/>
+                    <p:inputText id="localidadBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.nomLoc}" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 3 || hoja2Estudio.solicitud.bancoProyecto.idSol.idCob.idCob == 2 ? true:false}" />
+
+                    <p:outputLabel value="Tipo de localidad: " for="tipLocalidadBco" />
+                    <p:selectOneMenu id="tipLocalidadBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.idTipLoc}" required="true" converter="tipoLocConverter" label="Tipo de localidad">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItems value="#{hoja2Estudio.catalogoTiposLoc}" />                        
+                    </p:selectOneMenu> 
+                </h:panelGrid>
+                <h:panelGrid columns="3" columnClasses="etiqueta,valor,valor" cellpadding="5px">
+                    <p:outputLabel value="Coordenadas: " for="coorBco" />
+                    <p:selectOneMenu id="coorBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.cooGeo}" required="true" label="Coordenadas geogr&aacute;ficas">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />                                                
+                        <f:selectItem itemLabel="Si" itemValue="1" />                                                
+                        <f:selectItem itemLabel="No aplica" itemValue="2" /> 
+                        <p:ajax event="valueChange" update=":formGrl:panelHoja2Bco" />
+                    </p:selectOneMenu>
+                    <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px">                        
+                        <p:inputTextarea value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.obsCoo}"  cols="50" id="obsCoorBco" required="#{hoja2Estudio.solicitud.bancoProyecto.idSol.cooGeo eq 2 ? true:false}" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.cooGeo eq 2 ? true:false}"/>
+                        <p:outputLabel value="Escribir motivo por el cual no se capturan coordenadas" for="obsCoorBco" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.cooGeo eq 2 ? true:false}"/>
+                    </h:panelGrid>                    
+                </h:panelGrid>
+                <h:panelGrid columns="1" columnClasses="valor" cellpadding="5px" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.cooGeo eq 1 ? true:false}">                        
+                    <h:outputText value="Coordenadas Inicio" />
+                    <h:panelGrid columns="4" columnClasses="etiqueta,valor,etiqueta,valor" cellpadding="5px">
+                        <p:outputLabel value="Lat: " for="latIniBco" />
+                        <p:inputText id="latIniBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.latIni}" required="true" label="Latitud Inicial" >
+                            <p:ajax event="valueChange" listener="#{hoja2Estudio.cambioCoordenadas}" update="gmapBco" />
+                        </p:inputText>
+
+                        <p:outputLabel value="Lon: " for="lonIniBco" />
+                        <p:inputText id="lonIniBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.lonIni}" required="true" label="Longitud Inicial">
+                            <p:ajax event="valueChange" listener="#{hoja2Estudio.cambioCoordenadas}" update="gmapBco" />
+                        </p:inputText>
+                    </h:panelGrid>                    
+                    <h:outputText value="Coordenadas Finales" />
+                    <h:panelGrid columns="4" columnClasses="etiqueta,valor,etiqueta,valor" cellpadding="5px">
+                        <p:outputLabel value="Lat: " for="latFinBco" />
+                        <p:inputText id="latFinBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.latFin}" label="Latitud Final">
+                            <p:ajax event="valueChange" listener="#{hoja2Estudio.cambioCoordenadas}" update="gmapBco" />
+                        </p:inputText>
+
+                        <p:outputLabel value="Lon: " for="lonFinBco" />
+                        <p:inputText id="lonFinBco" value="#{hoja2Estudio.solicitud.bancoProyecto.idSol.lonFin}" label="Longitud Final">
+                            <p:ajax event="valueChange" listener="#{hoja2Estudio.cambioCoordenadas}" update="gmapBco" />
+                        </p:inputText>
+                    </h:panelGrid>                    
+                </h:panelGrid>
+                <h:panelGrid columns="2" styleClass="tablaMapa" columnClasses="etiqueta,valor" cellpadding="5px" rendered="#{hoja2Estudio.solicitud.bancoProyecto.idSol.cooGeo eq 1 ? true:false}">
+                    <p:outputLabel value="Mapa: " for="gmapBco" />
+                    <p:gmap id="gmapBco" center="#{hoja2Estudio.solicitud.bancoProyecto.idSol.latIni},#{hoja2Estudio.solicitud.bancoProyecto.idSol.lonIni}" zoom="12" type="hybrid" style="width:100%;height:400px;" model="#{hoja2Estudio.rectangleModel}"/>                                           
+                </h:panelGrid>
+                <h:panelGrid columns="2" styleClass="tablaMapa" columnClasses="etiqueta,valor" cellpadding="5px" rendered="true">
+                    <p:outputLabel value="Nombre del Responsable:" for="nomRespBco" />
+                    <p:inputText id="nomRespBco" value="#{hoja2Estudio.solicitud.bancoProyecto.nombreResp}" label="Nombre del responsable"/>
+
+                    <p:outputLabel value="Cargo del Responsable:" for="carRespBco" />
+                    <p:inputText id="carRespBco" value="#{hoja2Estudio.solicitud.bancoProyecto.cargoResp}" label="Cargo del responsable"/>
+
+                    <p:outputLabel value="Tel&eacute;fono del Responsable:" for="telRespBco" />
+                    <p:inputText id="telRespBco" value="#{hoja2Estudio.solicitud.bancoProyecto.telResp}" label="Tel&eacute;fono del responsable"/>
+
+                    <p:outputLabel value="Correo electr&oacute;nico del Responsable:" for="mailRespBco" />
+                    <p:inputText id="mailRespBco" value="#{hoja2Estudio.solicitud.bancoProyecto.emailResp}" label="Correo electr&oacute;nico del responsable"/>
+                </h:panelGrid>
                 <f:facet name="footer">
-                    <p:commandButton value="Guardar" id="guardarHoja2Bco" update="msgAccionesHoja2Bco,mensajesHoja2Bco" actionListener="#{hoja2Estudio.saveHoja2Bco}" styleClass="ui-priority-primary" />
+                    <p:commandButton value="Guardar" id="guardarHoja2Bco" update="msgAccionesHoja2Bco,mensajesHoja2Bco" actionListener="#{hoja2Estudio.saveHoja2Bco}" styleClass="ui-priority-primary" rendered="#{hoja2Estudio.solicitud.bancoProyecto.status eq 3 ? false : true}"/>
+                    <p:commandButton value="Enviar para dictaminar" id="enviarDict" update="msgAccionesHoja2Bco,mensajesHoja2Bco" actionListener="#{hoja2Estudio.enviarDictaminar}" styleClass="ui-priority-primary" rendered="#{hoja2Estudio.solicitud.bancoProyecto.status eq 3 ? false : true}">
+                        <p:confirm header="Confirmaci&oacute;n" message="¿Desea enviar a dictaminar?" icon="ui-icon-alert" />
+                    </p:commandButton>
                 </f:facet>
             </p:panel>
-        </ui:composition>        
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </ui:composition> 
+
     </h:body>
 </html>
 

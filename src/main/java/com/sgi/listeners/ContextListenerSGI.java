@@ -11,6 +11,7 @@ import com.sgi.dao.CatmunicipioDAO;
 import com.sgi.dao.CatregionDAO;
 import com.sgi.dao.CmodejeDAO;
 import com.sgi.dao.CtipObrDAO;
+import com.sgi.dao.CtiplocDAO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -55,6 +56,9 @@ public class ContextListenerSGI implements ServletContextListener {
         
         CatmunicipioDAO catmunicipioDAO = new CatmunicipioDAO();
         sc.setAttribute("catalogo_municipios", catmunicipioDAO.getRegiones());
+        
+        CtiplocDAO ctiplocDAO = new CtiplocDAO();
+        sc.setAttribute("catalogo_tipos_localidad", ctiplocDAO.getTipoLocalidades());
     }
 
     @Override

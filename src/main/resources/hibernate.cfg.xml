@@ -53,5 +53,6 @@
     <mapping class="com.sgi.pojos.Dsolfte"/>
     <mapping class="com.sgi.pojos.Relsolfte"/>
     <mapping class="com.sgi.pojos.Relsolbco"/>
+    <mapping class="com.sgi.pojos.Movbco"/>
   </session-factory>
 </hibernate-configuration>

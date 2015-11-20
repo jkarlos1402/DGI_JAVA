@@ -44,4 +44,5 @@
   <table-filter match-name="dsolfte"/>
   <table-filter match-name="relsolfte"/>
   <table-filter match-name="relsolbco"/>
+  <table-filter match-name="movbco"/>
 </hibernate-reverse-engineering>

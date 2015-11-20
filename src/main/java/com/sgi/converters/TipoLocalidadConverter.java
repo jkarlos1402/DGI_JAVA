@@ -1,6 +1,6 @@
 package com.sgi.converters;
 
-import com.sgi.pojos.Catmeta;
+import com.sgi.pojos.Ctiploc;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -8,19 +8,19 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.servlet.ServletContext;
 
-@FacesConverter("metasConverter")
-public class MetasConverter implements Converter{
+@FacesConverter("tipoLocConverter")
+public class TipoLocalidadConverter implements Converter{
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {                  
         if (value != null && value.trim().length() > 0) {
             try {
-                Catmeta metaT = new Catmeta();
-                metaT.setIdMet(new Integer(value));
+                Ctiploc tipoLocT = new Ctiploc();
+                tipoLocT.setIdTipLoc(new Integer(value));
                 ServletContext sc = (ServletContext) context.getExternalContext().getContext();
-                List<Catmeta> metas = (List<Catmeta>) sc.getAttribute("catalogo_metas");
-                for (Catmeta meta : metas) {
-                    if (meta.equals(metaT)) {
-                        return meta;
+                List<Ctiploc> tiposLocalidad = (List<Ctiploc>) sc.getAttribute("catalogo_tipos_localidad");
+                for (Ctiploc tipoLocalidad : tiposLocalidad) {
+                    if (tipoLocalidad.equals(tipoLocT)) {
+                        return tipoLocalidad;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -35,9 +35,9 @@ public class MetasConverter implements Converter{
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            if (value instanceof Catmeta) {
-                Catmeta meta = (Catmeta) value;
-                return meta.getIdMet()+ "";
+            if (value instanceof Ctiploc) {
+                Ctiploc tipoLoc = (Ctiploc) value;
+                return tipoLoc.getIdTipLoc()+ "";
             }else{
                 return null;
             }
